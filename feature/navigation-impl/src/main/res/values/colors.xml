@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <color name="orange">#FFFF4500</color>
+    <color name="gray">#FF797C80</color>
+    <color name="custom_color_secondary">#FF8f00</color>
+</resources>
