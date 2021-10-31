@@ -2,40 +2,38 @@ package com.testtask.exploereaesy.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.testtask.exploereaesy.EaesyApp
+import androidx.navigation.fragment.NavHostFragment
+import com.testtask.core_ui.NavigationState
+import com.testtask.core_ui.Navigator
+import com.testtask.exploereaesy.EasyApp
+import com.testtask.exploereaesy.NavigatorController
 import com.testtask.exploereaesy.R
 import com.testtask.exploereaesy.di.AppComponent
-import com.testtask.main.MainFeatureApi
-import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), Navigator {
 
-    @Inject
-    lateinit var mainFeatureApi: MainFeatureApi
+    private var navigator = NavigatorController()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         injectDependencies()
-        if (savedInstanceState == null) {
-            addInitFragment()
-        }
+        setupNavigation()
+    }
+
+    private fun setupNavigation() {
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.activity_nav_host) as NavHostFragment
+        val navController = navHostFragment.navController
+        navigator.navController = navController
     }
 
     private fun injectDependencies() {
-        val appComponent = (application as EaesyApp).appProvider as AppComponent
+        val appComponent = (application as EasyApp).appProvider as AppComponent
         appComponent.inject(this)
     }
 
-    private fun addInitFragment() {
-        val fragmentMain = mainFeatureApi.getMainFragment()
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.activity_nav_host, fragmentMain, TagMain)
-            .commit()
-    }
-
-    companion object {
-        const val TagMain = "TagMain"
+    override fun navigate(state: NavigationState) {
+        navigator.navigateToFlow(state)
     }
 }

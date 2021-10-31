@@ -8,7 +8,7 @@ const val hiltVersion = "2.33-beta"
 object AndroidSdk {
 
     const val min = 21
-    const val compile = 30
+    const val compile = 31
     const val target = compile
 }
 
@@ -47,7 +47,7 @@ object Libraries {
         const val assistedInject = "0.5.2"
 
 
-        const val lifecycle = "2.3.1"
+        const val lifecycle = "2.4.0"
 
         const val material = "1.3.0"
         const val constraintLayout = "2.0.4"
@@ -127,6 +127,14 @@ object Libraries {
     const val viewModelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
     const val viewModelSavedState = "androidx.lifecycle:lifecycle-viewmodel-savedstate:${Versions.lifecycle}"
     const val liveDataKtx = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
+    const val composeLifecycle = "androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.lifecycle}"
+    const val lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime:${Versions.lifecycle}"
+    const val lifecycleCompiler = "androidx.lifecycle:lifecycle-compiler:${Versions.lifecycle}"
+    const val lifecycleJava8 = "androidx.lifecycle:lifecycle-common-java8:${Versions.lifecycle}"
+    const val lifecycleService = "androidx.lifecycle:lifecycle-service:${Versions.lifecycle}"
+    const val lifecycleProcess = "androidx.lifecycle:lifecycle-process:${Versions.lifecycle}"
+    const val lifecycleReactivestreams= "androidx.lifecycle:lifecycle-reactivestreams-ktx:${Versions.lifecycle}"
+
 
     const val material = "com.google.android.material:material:${Versions.material}"
     const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
@@ -234,6 +242,18 @@ object Libraries {
         implementation(navigationDynamic)
     }
 
+    fun DependencyHandler.addLifeCycler(){
+        implementation(viewModelKtx)
+        implementation(viewModelSavedState)
+        implementation(liveDataKtx)
+//        implementation(composeLifecycle) min 31 complie
+        implementation(lifecycleRuntime)
+        implementation(lifecycleJava8)
+        implementation(lifecycleService)
+        implementation(lifecycleProcess)
+        add("kapt", lifecycleCompiler)
+        implementation(lifecycleReactivestreams)
+    }
 
     fun DependencyHandler.addCommonDependencies() {
         implementation(kotlin)

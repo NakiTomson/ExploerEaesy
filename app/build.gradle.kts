@@ -23,7 +23,6 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     compileSdkVersion(AndroidSdk.compile)
-    compileSdkVersion(30)
     buildToolsVersion ("30.0.3")
     compileOptions {
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -39,6 +38,7 @@ dependencies {
 //    addHilt()
     addNavigationFragment()
     implementation(project(":core-di"))
+    implementation(project(":core-ui"))
     implementation(project(":interactors-impl"))
     implementation(project(":persistence-impl"))
     implementation(project(":repositories-impl"))

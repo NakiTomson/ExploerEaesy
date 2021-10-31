@@ -3,6 +3,7 @@ buildscript {
 
     val kotlin_version by extra("1.4.31")
     val hilt_version by extra("2.33-beta")
+    val nav_version by extra("2.3.2")
 
     repositories {
         google()
@@ -17,6 +18,7 @@ buildscript {
         classpath(BuildPlugins.navigationGradlePlugin)
         classpath(BuildPlugins.hiltGradlePlugin)
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
+        classpath ("androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version")
     }
 }
 

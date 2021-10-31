@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="PagerLinearView">
+        <!--Ширина пунктирной линии-->
+        <attr name="plv_drop_line_width" format="dimension" />
+        <!--Высота пунктирной линии-->
+        <attr name="plv_drop_line_height" format="dimension" />
+        <!--Цвет пунктирной линии-->
+        <attr name="plv_drop_line_color" format="color" />
+        <!--Ширина указательной линии-->
+        <attr name="plv_indicator_line_width" format="dimension" />
+        <!--Высота указательной линии-->
+        <attr name="plv_indicator_line_height" format="dimension" />
+        <!--Цвет указательной линии-->
+        <attr name="plv_indicator_line_color" format="color" />
+        <!--Пространство между линиями-->
+        <attr name="plv_line_space" format="dimension" />
+        <!--Количество линий-->
+        <attr name="plv_lines_count" format="integer" />
+    </declare-styleable>
+</resources>

@@ -1,4 +1,4 @@
-package com.testtask.main_impl.ui.main.viewmodel
+package com.testtask.dashboard_impl.ui.model
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -6,14 +6,14 @@ import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
 import com.testtask.feature_core.AssistedSavedStateViewModelFactory
 
-
-class MainViewModel  @AssistedInject constructor(
+class DashBoardViewModel @AssistedInject constructor(
     @Assisted private val savedStateHandle: SavedStateHandle,
-) : ViewModel() {
+): ViewModel() {
+
 
 
     @AssistedInject.Factory
-    interface Factory : AssistedSavedStateViewModelFactory<MainViewModel> {
-        override fun create(savedStateHandle: SavedStateHandle): MainViewModel
+    interface Factory : AssistedSavedStateViewModelFactory<DashBoardViewModel> {
+        override fun create(savedStateHandle: SavedStateHandle): DashBoardViewModel
     }
 }

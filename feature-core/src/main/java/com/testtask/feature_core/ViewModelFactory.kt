@@ -10,16 +10,6 @@ import androidx.savedstate.SavedStateRegistryOwner
 import javax.inject.Inject
 import javax.inject.Provider
 
-//class ViewModelFactory @Inject constructor(
-//    private val viewModels: MutableMap<Class<out ViewModel>, Provider<ViewModel>>
-//) : ViewModelProvider.Factory {
-//
-//    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-//        val viewModelProvider = viewModels[modelClass] ?: throw Exception("Lox")
-//        return viewModelProvider.get() as T
-//    }
-//}
-
 class ViewModelFactory<T: ViewModel>(
     savedStateRegistryOwner: SavedStateRegistryOwner,
     private val create: (stateHandle: SavedStateHandle) -> T

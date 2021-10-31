@@ -6,7 +6,7 @@ import com.testtask.core_di.ApplicationProvider
 import com.testtask.exploereaesy.di.AppComponent
 import com.testtask.exploereaesy.di.ContextComponent
 
-class EaesyApp : Application(), ApplicationProvider {
+class EasyApp : Application(), ApplicationProvider {
 
     override lateinit var appProvider: AppProvider
 
