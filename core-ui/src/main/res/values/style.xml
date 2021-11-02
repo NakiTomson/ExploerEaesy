@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <style name="MaterialButton" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/orange</item>
+    </style>
+
+</resources>

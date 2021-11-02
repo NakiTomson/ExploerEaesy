@@ -5,6 +5,10 @@ import com.testtask.core_di.AppProvider
 import com.testtask.core_di.ApplicationProvider
 import com.testtask.exploereaesy.di.AppComponent
 import com.testtask.exploereaesy.di.ContextComponent
+import com.testtask.interactors_impl.di.InteractorsComponent
+import com.testtask.network_impl.di.NetworkComponent
+import com.testtask.persistence_impl.di.PersistenceComponent
+import com.testtask.repositories_impl.di.RepositoriesComponent
 
 class EasyApp : Application(), ApplicationProvider {
 
@@ -17,8 +21,23 @@ class EasyApp : Application(), ApplicationProvider {
 
     private fun setupDI() {
         val contextComponent = ContextComponent.create(this)
-        appProvider = AppComponent.create(
+        val persistenceComponent = PersistenceComponent.create(contextComponent)
+        val networkComponent = NetworkComponent.create(
             contextComponent
+        )
+        val repositoriesComponent = RepositoriesComponent.create(
+            networkComponent,
+            contextComponent,
+            persistenceComponent
+        )
+        val interactorsComponent = InteractorsComponent.create(
+            repositoriesComponent,
+        )
+        appProvider = AppComponent.create(
+            contextComponent,
+            networkComponent,
+            repositoriesComponent,
+            interactorsComponent
         )
     }
 }

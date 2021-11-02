@@ -10,5 +10,8 @@ class NavigatorController {
 
     fun navigateToFlow(state: NavigationState) = when (state) {
         is NavigationState.DashboardFragment -> navController.navigate(SplashFragmentDirections.actionSplashFragmentToDashBoardFragment())
+        is NavigationState.NavigationFragment -> {
+            navController.navigate(SplashFragmentDirections.actionGlobalNavigationFragment())
+        }
     }
 }

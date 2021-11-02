@@ -27,21 +27,5 @@ dependencies {
     api(Libraries.pinView)
     api(Libraries.decoro)
     debugApi(Libraries.leakCanary)
+    api(project(":entity"))
 }
-
-android {
-
-    defaultConfig {
-        minSdkVersion(AndroidSdk.min)
-        targetSdkVersion(AndroidSdk.target)
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-    compileSdkVersion(AndroidSdk.compile)
-    compileOptions {
-        targetCompatibility = JavaVersion.VERSION_1_8
-        sourceCompatibility = JavaVersion.VERSION_1_8
-    }
-}
-
-

@@ -8,7 +8,5 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:defaultNavHost="true"
-    app:navGraph="@navigation/base_graph"
-    tools:context=".view.MainActivity">
-
-</androidx.fragment.app.FragmentContainerView>
+    app:navGraph="@navigation/splash_graph"
+    tools:context=".view.MainActivity" />

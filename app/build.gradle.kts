@@ -13,39 +13,27 @@ plugins {
 
 
 android {
-
     defaultConfig {
-        applicationId("com.testtask.exploereaesy")
-        minSdkVersion(AndroidSdk.min)
-        targetSdkVersion(AndroidSdk.target)
-        versionCode(1)
-        versionName("1.0")
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-    compileSdkVersion(AndroidSdk.compile)
-    buildToolsVersion ("30.0.3")
-    compileOptions {
-        targetCompatibility = JavaVersion.VERSION_1_8
-        sourceCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        applicationId(AndroidSdk.applicationId)
+        versionCode(AndroidSdk.verstionCode)
+        versionName(AndroidSdk.versionName)
     }
 }
 
 dependencies {
     addCommonDependencies()
-//    addHilt()
     addNavigationFragment()
     implementation(project(":core-di"))
     implementation(project(":core-ui"))
+    implementation(project(":network-impl"))
     implementation(project(":interactors-impl"))
     implementation(project(":persistence-impl"))
     implementation(project(":repositories-impl"))
     implementation(project(":feature:dashboard-impl"))
     implementation(project(":feature:splash-impl"))
     implementation(project(":feature:navigation-impl"))
-    implementation(project(":feature:main-impl"))
+    implementation(project(":feature:home-impl"))
+    implementation(project(":feature:user-impl"))
 }
 
 

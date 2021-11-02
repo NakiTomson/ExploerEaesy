@@ -1,10 +1,7 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
 buildscript {
 
-    val kotlin_version by extra("1.4.31")
-    val hilt_version by extra("2.33-beta")
-    val nav_version by extra("2.3.2")
-
+    val kotlin_version by extra("1.4.10")
     repositories {
         google()
         mavenCentral()
@@ -17,8 +14,8 @@ buildscript {
         classpath(BuildPlugins.kotlinGradlePlugin)
         classpath(BuildPlugins.navigationGradlePlugin)
         classpath(BuildPlugins.hiltGradlePlugin)
+        classpath(BuildPlugins.navigationGradlePlugin)
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
-        classpath ("androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version")
     }
 }
 
@@ -32,6 +29,27 @@ allprojects {
     }
 }
 
-plugins {
-    kotlin("android") version kotlinVersion apply false
+subprojects {
+
+    @Suppress("DEPRECATION") // Alternative is to do it for each android plugin id.
+    plugins.withType(com.android.build.gradle.BasePlugin::class.java).configureEach {
+        project.extensions.getByType<com.android.build.gradle.BaseExtension>().apply {
+            compileSdkVersion(AndroidSdk.compile)
+            defaultConfig {
+                minSdkVersion(AndroidSdk.min)
+                targetSdkVersion(AndroidSdk.target)
+                testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+            }
+            compileOptions {
+                sourceCompatibility = JavaVersion.VERSION_1_8
+                targetCompatibility = JavaVersion.VERSION_1_8
+            }
+        }
+    }
+
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class.java).configureEach {
+        kotlinOptions {
+            jvmTarget = JavaVersion.VERSION_1_8.toString()
+        }
+    }
 }

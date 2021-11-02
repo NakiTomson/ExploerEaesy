@@ -19,38 +19,22 @@ fun BottomNavigationView.setupWithNavController(
     intent: Intent
 ): LiveData<NavController> {
 
-
     val graphIdToTagMap = SparseArray<String>()
-
     val selectedNavController = MutableLiveData<NavController>()
-
     var firstFragmentGraphId = 0
-
 
     navGraphIds.forEachIndexed { index, navGraphId ->
         val fragmentTag = getFragmentTag(index)
-
-
         val navHostFragment = obtainNavHostFragment(
             fragmentManager,
             fragmentTag,
             navGraphId,
             containerId
         )
-
-
         val graphId = navHostFragment.navController.graph.id
-
-        if (index == 0) {
-            firstFragmentGraphId = graphId
-        }
-
-
+        if (index == 0) firstFragmentGraphId = graphId
         graphIdToTagMap[graphId] = fragmentTag
-
-
         if (this.selectedItemId == graphId) {
-
             selectedNavController.value = navHostFragment.navController
             attachNavHostFragment(fragmentManager, navHostFragment, index == 0)
         } else {
@@ -77,9 +61,7 @@ fun BottomNavigationView.setupWithNavController(
                 val selectedFragment = fragmentManager.findFragmentByTag(newlySelectedItemTag)
                     as NavHostFragment
 
-
                 if (firstFragmentTag != newlySelectedItemTag) {
-
                     fragmentManager.beginTransaction()
                         .setCustomAnimations(
                             R.anim.slide_in,
@@ -112,16 +94,12 @@ fun BottomNavigationView.setupWithNavController(
 
     // Optional: on item reselected, pop back stack to the destination of the graph
     setupItemReselected(graphIdToTagMap, fragmentManager)
-
     setupDeepLinks(navGraphIds, fragmentManager, containerId, intent)
-
 
     fragmentManager.addOnBackStackChangedListener {
         if (!isOnFirstFragment && !fragmentManager.isOnBackStack(firstFragmentTag)) {
             this.selectedItemId = firstFragmentGraphId
         }
-
-
         selectedNavController.value?.let { controller ->
             if (controller.currentDestination == null) {
                 controller.navigate(controller.graph.id)
@@ -139,7 +117,6 @@ private fun BottomNavigationView.setupDeepLinks(
 ) {
     navGraphIds.forEachIndexed { index, navGraphId ->
         val fragmentTag = getFragmentTag(index)
-
         val navHostFragment = obtainNavHostFragment(
             fragmentManager,
             fragmentTag,
@@ -202,7 +179,6 @@ private fun obtainNavHostFragment(
 
     val existingFragment = fragmentManager.findFragmentByTag(fragmentTag) as NavHostFragment?
     existingFragment?.let { return it }
-
 
     val navHostFragment = NavHostFragment.create(navGraphId)
     fragmentManager.beginTransaction()

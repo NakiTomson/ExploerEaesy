@@ -1,7 +1,6 @@
 package com.testtask.exploereaesy.di
 
-import com.testtask.core_di.AppProvider
-import com.testtask.core_di.ContextProvider
+import com.testtask.core_di.*
 import com.testtask.exploereaesy.view.MainActivity
 import dagger.Component
 import javax.inject.Singleton
@@ -10,6 +9,9 @@ import javax.inject.Singleton
 @Component(
     dependencies = [
         ContextProvider::class,
+        RepositoryProvider::class,
+        InteractorsProvider::class,
+        NetworkProvider::class,
     ],
     modules = [
         FeatureApisModule::class
@@ -22,10 +24,16 @@ interface AppComponent : AppProvider {
     companion object {
 
         fun create(
-            contextProvider: ContextProvider
+            contextProvider: ContextProvider,
+            networkProvider: NetworkProvider,
+            repositoryProvider: RepositoryProvider,
+            interactorsProvider: InteractorsProvider,
         ): AppComponent {
             return DaggerAppComponent.builder()
                 .contextProvider(contextProvider)
+                .networkProvider(networkProvider)
+                .repositoryProvider(repositoryProvider)
+                .interactorsProvider(interactorsProvider)
                 .build()
         }
     }

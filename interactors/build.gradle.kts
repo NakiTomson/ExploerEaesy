@@ -5,26 +5,9 @@ plugins {
     kotlin("android")
     kotlin("kapt")
 }
-repositories {
-    jcenter()
-    maven { setUrl("https://jitpack.io") }
-}
 
 dependencies {
     addCommonDependencies()
-}
-
-android {
-
-    defaultConfig {
-        minSdkVersion(AndroidSdk.min)
-        targetSdkVersion(AndroidSdk.target)
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-    compileSdkVersion(AndroidSdk.compile)
-    compileOptions {
-        targetCompatibility = JavaVersion.VERSION_1_8
-        sourceCompatibility = JavaVersion.VERSION_1_8
-    }
+    api(project(":entity"))
+    implementation(project(":repositories"))
 }

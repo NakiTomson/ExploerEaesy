@@ -2,15 +2,18 @@ package com.testtask.navigation_impl.ui.view
 
 import android.content.Context
 import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
 import com.testtask.feature_core.lazyViewModel
 import com.testtask.navigation_impl.R
 import com.testtask.navigation_impl.di.injector
-import com.testtask.navigation_impl.setupWithNavController
 import com.testtask.navigation_impl.ui.viewModel.NavigationViewModel
+import kotlinx.android.synthetic.main.fragment_navigation.*
+
 
 class NavigationFragment : Fragment(R.layout.fragment_navigation) {
 
@@ -25,28 +28,18 @@ class NavigationFragment : Fragment(R.layout.fragment_navigation) {
         injector.inject(this)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        if (savedInstanceState == null) {
-            setupBottomNavigationBar()
-        }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupBottomNavigationBar()
         viewModel.apply {
 
         }
     }
 
-    private fun setupBottomNavigationBar() {
-        val bottomNavigationView =
-            view?.findViewById<BottomNavigationView>(R.id.bottomNavigationView)
-        val navGraphIds = listOf(R.navigation.home)
-        val controller = bottomNavigationView?.setupWithNavController(
-            navGraphIds = navGraphIds,
-            fragmentManager = activity?.supportFragmentManager!!,
-            containerId = R.id.nav_host_container,
-            intent = activity?.intent!!
-        )
-        currentNavController = controller
-        bottomNavigationView?.callOnClick()
+    private fun setupBottomNavigationBar(){
+        val navHost = childFragmentManager.findFragmentById(R.id.nav_host_container) as NavHostFragment
+        val navController = navHost.navController
+        NavigationUI.setupWithNavController(bottomNavigationView, navController)
     }
 
     companion object {

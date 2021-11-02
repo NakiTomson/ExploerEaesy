@@ -4,26 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rootDashBoard"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/welcomePager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/tvToApp"
+        app:layout_constraintBottom_toTopOf="@+id/tvNext"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
     <com.testtask.core_ui.view.PagerLinearView
-        android:id="@+id/plv"
+        android:id="@+id/plvCounter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/tvBack"
+        app:layout_constraintEnd_toStartOf="@+id/tvNext"
+        app:layout_constraintStart_toEndOf="@+id/tvBack"
+        app:layout_constraintTop_toBottomOf="@+id/welcomePager"
         app:plv_drop_line_color="@color/gray_6"
         app:plv_drop_line_height="2dp"
         app:plv_drop_line_width="15dp"
@@ -32,41 +33,29 @@
         app:plv_indicator_line_width="64dp"
         app:plv_line_space="4dp" />
 
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tvToApp"
-        android:layout_width="0dp"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/tvNext"
+        style="@style/MaterialButton"
+        android:layout_width="56dp"
         android:layout_height="56dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="32dp"
-        android:background="@drawable/ripple_orage_rounded_btn"
-        android:gravity="center"
-        android:letterSpacing="0.0"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp"
-        android:text="Начать"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        android:visibility="gone"
+        app:cornerRadius="16dp"
+        app:icon="@drawable/ic_navigate_next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         tools:visibility="visible" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tvSkip"
-        android:layout_width="wrap_content"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/tvBack"
+        style="@style/MaterialButton"
+        android:layout_width="56dp"
         android:layout_height="56dp"
+        android:layout_marginStart="16dp"
         android:layout_marginBottom="32dp"
-        android:padding="16dp"
-        android:text="Пропустить"
-        android:textAlignment="center"
-        android:textColor="@color/gray"
-        android:textSize="14sp"
-        android:visibility="visible"
+        app:cornerRadius="16dp"
+        app:icon="@drawable/ic_navigate_before"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

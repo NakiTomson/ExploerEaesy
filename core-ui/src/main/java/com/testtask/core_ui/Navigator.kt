@@ -6,4 +6,5 @@ interface Navigator {
 
 sealed class NavigationState {
     object DashboardFragment : NavigationState()
+    object NavigationFragment : NavigationState()
 }

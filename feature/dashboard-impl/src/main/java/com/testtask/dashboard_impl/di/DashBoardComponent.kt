@@ -1,8 +1,8 @@
 package com.testtask.dashboard_impl.di
 
 import com.testtask.core_di.AppProvider
-import com.testtask.dashboard_impl.ui.model.DashBoardViewModel
-import com.testtask.dashboard_impl.ui.view.DashBoardFragment
+import com.testtask.dashboard_impl.ui.dashboard.model.DashBoardViewModel
+import com.testtask.dashboard_impl.ui.dashboard.view.DashBoardFragment
 import dagger.Component
 
 @Component(
