@@ -43,7 +43,7 @@ object Libraries {
         const val coroutines = "1.4.3"
         const val appCompat = "1.3.0"
         const val fragment = "1.3.4"
-        const val navigation = "2.3.2"
+        const val navigation = "2.4.0-alpha10"
         const val coreKtx = "1.5.0"
         const val lifecycle = "2.4.0"
         const val material = "1.3.0"

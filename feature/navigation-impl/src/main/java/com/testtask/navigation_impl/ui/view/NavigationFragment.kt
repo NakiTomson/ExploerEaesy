@@ -4,10 +4,8 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
-import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupWithNavController
 import com.testtask.feature_core.lazyViewModel
 import com.testtask.navigation_impl.R
 import com.testtask.navigation_impl.di.injector
@@ -16,8 +14,6 @@ import kotlinx.android.synthetic.main.fragment_navigation.*
 
 
 class NavigationFragment : Fragment(R.layout.fragment_navigation) {
-
-    private var currentNavController: LiveData<NavController>? = null
 
     private val viewModel: NavigationViewModel by lazyViewModel { stateHandle ->
         injector.viewModelFactory().create(stateHandle)
@@ -36,10 +32,10 @@ class NavigationFragment : Fragment(R.layout.fragment_navigation) {
         }
     }
 
-    private fun setupBottomNavigationBar(){
+    private fun setupBottomNavigationBar() {
         val navHost = childFragmentManager.findFragmentById(R.id.nav_host_container) as NavHostFragment
         val navController = navHost.navController
-        NavigationUI.setupWithNavController(bottomNavigationView, navController)
+        bottomNavigationView.setupWithNavController(navController)
     }
 
     companion object {

@@ -10,6 +10,6 @@
         android:id="@+id/userFragment"
         android:name="com.example.user.ui.user.view.UserFragment"
         android:label="MainFragment"
-        tools:layout="@layout/user_fragment_user" />
+        tools:layout="@layout/user_fragment_user"/>
 
 </navigation>

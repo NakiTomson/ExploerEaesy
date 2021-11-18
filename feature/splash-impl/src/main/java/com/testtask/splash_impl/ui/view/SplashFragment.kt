@@ -5,8 +5,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import com.testtask.core_ui.NavigationState
-import com.testtask.core_ui.Navigator
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
+import com.testtask.core_ui.DirectionsNavigation
+import com.testtask.core_ui.NavigationAction
 import com.testtask.core_ui.utils.NetworkConnection
 import com.testtask.core_ui.utils.launchWhenStarted
 import com.testtask.feature_core.lazyViewModel
@@ -30,7 +31,7 @@ class SplashFragment : Fragment(R.layout.splash_fragment) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.apply {
             openDashBoard.onEach {
-                (requireActivity() as Navigator).navigate(NavigationState.DashboardFragment)
+                (requireActivity() as DirectionsNavigation).navigate(NavigationAction.DashBoard)
             }.launchWhenStarted(lifecycleScope)
         }
         changeNetworkState()

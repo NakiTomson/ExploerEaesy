@@ -1,12 +1,15 @@
 package com.testtask.dashboard_impl.ui.dashboard.view
 
 import android.content.Context
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import com.testtask.core_ui.NavigationState
-import com.testtask.core_ui.Navigator
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
+import com.testtask.core_ui.DirectionsNavigation
+import com.testtask.core_ui.NavigationAction
 import com.testtask.core_ui.utils.launchWhenStarted
 import com.testtask.dashboard_impl.R
 import com.testtask.dashboard_impl.adapter.ViewPagerAdapter
@@ -59,7 +62,9 @@ class DashBoardFragment : Fragment(R.layout.dashborad_fragment) {
     }
 
     private fun closeDashBoard(close: Boolean) {
-        if (close) (requireActivity() as Navigator).navigate(NavigationState.NavigationFragment)
+        if (close){
+            (requireActivity() as DirectionsNavigation).navigate(NavigationAction.Menu)
+        }
     }
 
     private fun setScreenPosition(position: Int) {
@@ -70,5 +75,6 @@ class DashBoardFragment : Fragment(R.layout.dashborad_fragment) {
     companion object {
 
         fun create() = DashBoardFragment()
+
     }
 }
