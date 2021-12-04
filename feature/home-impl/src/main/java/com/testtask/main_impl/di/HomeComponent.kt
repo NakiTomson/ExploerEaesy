@@ -14,8 +14,6 @@ interface HomeComponent {
 
     fun inject(fragment: HomeFragment)
 
-    fun mainViewModel(): HomeViewModel.Factory
-
     companion object {
 
         fun create(appProvider: AppProvider): HomeComponent {

@@ -14,8 +14,6 @@ interface DashBoardComponent {
 
     fun inject(fragment: DashBoardFragment)
 
-    fun dashBoardViewModel(): DashBoardViewModel.Factory
-
     companion object {
 
         fun create(appProvider: AppProvider): DashBoardComponent {

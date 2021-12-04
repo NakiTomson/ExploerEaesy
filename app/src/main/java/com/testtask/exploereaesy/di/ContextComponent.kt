@@ -4,16 +4,16 @@ import android.content.Context
 import com.testtask.core_di.ContextProvider
 import dagger.BindsInstance
 import dagger.Component
-import javax.inject.Singleton
+import dagger.Reusable
 
-@Singleton
 @Component
 interface ContextComponent : ContextProvider {
 
     @Component.Builder
     interface Builder {
 
-        fun context(@BindsInstance context: Context): Builder
+        @BindsInstance
+        fun context(@Reusable context: Context): Builder
 
         fun build(): ContextComponent
     }

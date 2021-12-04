@@ -14,8 +14,6 @@ interface NavigationComponent {
 
     fun inject(fragment: NavigationFragment)
 
-    fun viewModelFactory(): NavigationViewModel.Factory
-
     companion object {
 
         fun create(appProvider: AppProvider): NavigationComponent {

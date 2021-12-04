@@ -1,7 +1,9 @@
 package com.testtask.exploereaesy.di
 
+import android.app.Application
 import com.testtask.core_di.*
 import com.testtask.exploereaesy.view.MainActivity
+import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
 

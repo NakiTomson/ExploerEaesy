@@ -15,11 +15,6 @@
         android:name="com.testtask.splash_impl.ui.view.SplashFragment"
         android:label="SplashFragment"
         tools:layout="@layout/splash_fragment">
-        <action
-            android:id="@+id/action_splashFragment_to_dashBoardFragment"
-            app:destination="@id/dashBoardFragment"
-            app:popUpTo="@id/dashBoardFragment"
-            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -33,10 +28,5 @@
         android:name="com.testtask.navigation_impl.ui.view.NavigationFragment"
         android:label="NavigationFragment"
         tools:layout="@layout/fragment_navigation" />
-
-    <action
-        android:id="@+id/action_global_navigationFragment"
-        app:destination="@id/navigationFragment" />
-
 
 </navigation>

@@ -1,6 +1,7 @@
 package com.testtask.exploereaesy
 
 import android.app.Application
+import android.content.Context
 import com.testtask.core_di.AppProvider
 import com.testtask.core_di.ApplicationProvider
 import com.testtask.exploereaesy.di.AppComponent

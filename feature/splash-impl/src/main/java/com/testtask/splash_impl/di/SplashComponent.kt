@@ -12,8 +12,6 @@ interface SplashComponent {
 
     fun inject(fragment: SplashFragment)
 
-    fun viewModelFactory(): SplashViewModel.Factory
-
     companion object {
 
         fun create(appProvider: AppProvider): SplashComponent {

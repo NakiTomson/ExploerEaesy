@@ -3,24 +3,23 @@ package com.testtask.splash_impl.ui.view
 import android.content.Context
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
-import com.testtask.core_ui.DirectionsNavigation
-import com.testtask.core_ui.NavigationAction
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
+import com.testtask.base.BaseFragment
 import com.testtask.core_ui.utils.NetworkConnection
 import com.testtask.core_ui.utils.launchWhenStarted
-import com.testtask.feature_core.lazyViewModel
 import com.testtask.splash_impl.R
 import com.testtask.splash_impl.di.injector
 import com.testtask.splash_impl.ui.model.SplashViewModel
 import kotlinx.coroutines.flow.onEach
 
-class SplashFragment : Fragment(R.layout.splash_fragment) {
+class SplashFragment : BaseFragment(R.layout.splash_fragment) {
 
-    private val viewModel: SplashViewModel by lazyViewModel { stateHandle ->
-        injector.viewModelFactory().create(stateHandle)
-    }
+    private val viewModel: SplashViewModel by viewModels()
+
+    private var navController: NavController? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -29,9 +28,10 @@ class SplashFragment : Fragment(R.layout.splash_fragment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        navController = findNavController()
         viewModel.apply {
             openDashBoard.onEach {
-                (requireActivity() as DirectionsNavigation).navigate(NavigationAction.DashBoard)
+                navController?.navigate(R.id.dashBoardFragment)
             }.launchWhenStarted(lifecycleScope)
         }
         changeNetworkState()

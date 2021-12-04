@@ -1,15 +1,14 @@
 package com.testtask.dashboard_impl.ui.dashboard.view
 
 import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
-import com.testtask.core_ui.DirectionsNavigation
-import com.testtask.core_ui.NavigationAction
+import com.testtask.base.BaseFragment
 import com.testtask.core_ui.utils.launchWhenStarted
 import com.testtask.dashboard_impl.R
 import com.testtask.dashboard_impl.adapter.ViewPagerAdapter
@@ -20,11 +19,11 @@ import com.testtask.feature_core.lazyViewModel
 import kotlinx.android.synthetic.main.dashborad_fragment.*
 import kotlinx.coroutines.flow.onEach
 
-class DashBoardFragment : Fragment(R.layout.dashborad_fragment) {
+class DashBoardFragment : BaseFragment(R.layout.dashborad_fragment) {
 
-    private val viewModel: DashBoardViewModel by lazyViewModel { stateHandle ->
-        injector.dashBoardViewModel().create(stateHandle)
-    }
+    private val viewModel: DashBoardViewModel by viewModels()
+
+    private var navController: NavController? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -33,6 +32,7 @@ class DashBoardFragment : Fragment(R.layout.dashborad_fragment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        navController = findNavController()
         viewModel.apply {
             dashBoardScreens.onEach {
                 setupPagerViews(it)
@@ -62,8 +62,8 @@ class DashBoardFragment : Fragment(R.layout.dashborad_fragment) {
     }
 
     private fun closeDashBoard(close: Boolean) {
-        if (close){
-            (requireActivity() as DirectionsNavigation).navigate(NavigationAction.Menu)
+        if (close) {
+            navController?.navigate(R.id.navigationFragment)
         }
     }
 

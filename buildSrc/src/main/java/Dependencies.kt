@@ -38,7 +38,7 @@ object Libraries {
 
     object Versions {
         const val dagger = "2.40"
-        const val assistedInject = "0.5.2"
+//        const val assistedInject = "0.5.2"
         const val hilt = "2.40"
         const val coroutines = "1.4.3"
         const val appCompat = "1.3.0"
@@ -94,8 +94,8 @@ object Libraries {
     //Dagger
     const val dagger = "com.google.dagger:dagger:${Versions.dagger}"
     const val daggerCompiler = "com.google.dagger:dagger-compiler:${Versions.dagger}"
-    const val assistedInjectAnnotations = "com.squareup.inject:assisted-inject-annotations-dagger2:${Versions.assistedInject}"
-    const val assistedInjectProcessor = "com.squareup.inject:assisted-inject-processor-dagger2:${Versions.assistedInject}"
+//    const val assistedInjectAnnotations = "com.squareup.inject:assisted-inject-annotations-dagger2:${Versions.assistedInject}"
+//    const val assistedInjectProcessor = "com.squareup.inject:assisted-inject-processor-dagger2:${Versions.assistedInject}"
 
     //Hilt
     const val hilt = "com.google.dagger:hilt-android:${Versions.hilt}"
@@ -243,8 +243,8 @@ object Libraries {
         implementation(dagger)
         implementation(glide)
         implementation(material)
-        compileOnly(assistedInjectAnnotations)
-        kapt(assistedInjectProcessor)
+//        compileOnly(assistedInjectAnnotations)
+//        kapt(assistedInjectProcessor)
         kapt(daggerCompiler)
         kapt(glideCompiler)
     }
