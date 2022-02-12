@@ -2,7 +2,7 @@
 
 import org.gradle.api.artifacts.dsl.DependencyHandler
 
-const val kotlinVersion = "1.5.20"
+const val kotlinVersion = "1.6.0"
 
 object AndroidSdk {
     const val applicationId = "com.testtask.exploereaesy"
@@ -38,7 +38,7 @@ object Libraries {
 
     object Versions {
         const val dagger = "2.40"
-//        const val assistedInject = "0.5.2"
+        const val daggerCompiler = "2.40"
         const val hilt = "2.40"
         const val coroutines = "1.4.3"
         const val appCompat = "1.3.0"
@@ -93,9 +93,7 @@ object Libraries {
 
     //Dagger
     const val dagger = "com.google.dagger:dagger:${Versions.dagger}"
-    const val daggerCompiler = "com.google.dagger:dagger-compiler:${Versions.dagger}"
-//    const val assistedInjectAnnotations = "com.squareup.inject:assisted-inject-annotations-dagger2:${Versions.assistedInject}"
-//    const val assistedInjectProcessor = "com.squareup.inject:assisted-inject-processor-dagger2:${Versions.assistedInject}"
+    const val daggerCompiler = "com.google.dagger:dagger-compiler:${Versions.daggerCompiler}"
 
     //Hilt
     const val hilt = "com.google.dagger:hilt-android:${Versions.hilt}"
@@ -106,6 +104,7 @@ object Libraries {
     const val viewModelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
     const val viewModelSavedState = "androidx.lifecycle:lifecycle-viewmodel-savedstate:${Versions.lifecycle}"
     const val liveDataKtx = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
+    const val lifecycleKtx = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle}"
     const val composeLifecycle = "androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.lifecycle}"
     const val lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime:${Versions.lifecycle}"
     const val lifecycleCompiler = "androidx.lifecycle:lifecycle-compiler:${Versions.lifecycle}"
@@ -225,13 +224,14 @@ object Libraries {
     fun DependencyHandler.addLifeCycler() {
         implementation(viewModelKtx)
         implementation(viewModelSavedState)
-        implementation(liveDataKtx)
-        implementation(composeLifecycle)
+//        implementation(liveDataKtx)
+//        implementation(composeLifecycle)
         implementation(lifecycleRuntime)
-        implementation(lifecycleJava8)
-        implementation(lifecycleService)
-        implementation(lifecycleProcess)
-        implementation(lifecycleReactivestreams)
+        implementation(lifecycleKtx)
+//        implementation(lifecycleJava8)
+//        implementation(lifecycleService)
+//        implementation(lifecycleProcess)
+//        implementation(lifecycleReactivestreams)
         kapt(lifecycleCompiler)
     }
 
@@ -243,8 +243,6 @@ object Libraries {
         implementation(dagger)
         implementation(glide)
         implementation(material)
-//        compileOnly(assistedInjectAnnotations)
-//        kapt(assistedInjectProcessor)
         kapt(daggerCompiler)
         kapt(glideCompiler)
     }

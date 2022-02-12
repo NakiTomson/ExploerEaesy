@@ -1,5 +1,4 @@
 import Libraries.addCommonDependencies
-import Libraries.addHilt
 
 plugins {
     id("com.android.library")

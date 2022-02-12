@@ -1,6 +1,6 @@
 import Libraries.addCommonDependencies
 import Libraries.addNavigationFragment
-import Libraries.addHilt
+
 
 plugins {
     id("com.android.application")

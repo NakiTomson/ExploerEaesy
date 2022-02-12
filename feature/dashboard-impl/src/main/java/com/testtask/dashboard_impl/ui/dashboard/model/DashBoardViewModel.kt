@@ -1,9 +1,12 @@
 package com.testtask.dashboard_impl.ui.dashboard.model
 
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.testtask.base.BaseViewModel
+import com.testtask.core_ui.utils.SingleLiveEventFlow
+import com.testtask.dashboard_impl.ui.dashboard.state.DashBoardStateHandel
+import com.testtask.ext.into
+import com.testtask.ext.sendEvent
 import com.testtask.feature_core.AssistedSavedStateViewModelFactory
 import com.testtask.interactors.DashBoardInteractor
 import dagger.assisted.Assisted
@@ -20,17 +23,28 @@ class DashBoardViewModel @AssistedInject constructor(
     private val dashBoardInteractor: DashBoardInteractor,
 ) : BaseViewModel() {
 
-    val dashBoardScreens = dashBoardInteractor.dashBoardScreens.shareIn(
-        viewModelScope, started = SharingStarted.Lazily, 1
-    )
+//    override val state = DashBoardStateHandel(dashBoardInteractor, viewModelScope)
 
-    private val _selectPageFlow = MutableStateFlow(0)
-    val selectPage = _selectPageFlow.asStateFlow()
+    val dashBoardScreens =
+        dashBoardInteractor.dashBoardScreens.shareIn(viewModelScope, SharingStarted.Lazily, 1)
 
-    private val _closeDashBoardFlow = MutableStateFlow(false)
-    val closeDashBoard = _closeDashBoardFlow.asStateFlow()
+    private val _selectPage = MutableStateFlow(0)
+    val selectPage = _selectPage.asStateFlow()
 
-    private var selectedPagePosition = 0
+    private val _closeDashBoard = SingleLiveEventFlow<Unit>()
+    val closeDashBoard = _closeDashBoard.singleEvent
+
+    var selectedPagePosition = 0
+
+    init {
+        loadDashBoard()
+    }
+
+    private fun loadDashBoard() {
+        launch {
+            dashBoardInteractor.loadDashBoardScreens()
+        }
+    }
 
     fun onNextClicked() {
         launch {
@@ -38,7 +52,7 @@ class DashBoardViewModel @AssistedInject constructor(
                 incrementPosition()
                 return@launch
             }
-            _closeDashBoardFlow.emit(true)
+            sendEvent(_closeDashBoard)
         }
     }
 
@@ -50,12 +64,12 @@ class DashBoardViewModel @AssistedInject constructor(
 
     private fun incrementPosition() {
         selectedPagePosition += 1
-        _selectPageFlow.value = selectedPagePosition
+        into(_selectPage) { selectedPagePosition }
     }
 
     private fun decrementPosition() {
         selectedPagePosition -= 1
-        _selectPageFlow.value = selectedPagePosition
+        into(_selectPage) { selectedPagePosition }
     }
 
     @AssistedFactory

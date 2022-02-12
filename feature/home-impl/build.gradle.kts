@@ -1,5 +1,4 @@
 import Libraries.addCommonDependencies
-import Libraries.addHilt
 import Libraries.addNavigationFragment
 
 plugins {

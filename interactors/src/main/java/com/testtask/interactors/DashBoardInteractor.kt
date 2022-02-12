@@ -7,4 +7,5 @@ interface DashBoardInteractor {
 
     val dashBoardScreens: Flow<List<BoardScreenEntity>>
 
+    suspend fun loadDashBoardScreens()
 }

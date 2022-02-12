@@ -1,8 +1,11 @@
 package com.testtask.repositories
 
 import com.testtask.entity.BoardScreenEntity
+import kotlinx.coroutines.flow.Flow
 
 interface DashBoardRepository {
 
-    suspend fun loadDashBoardScreens(): List<BoardScreenEntity>
+    val dashBoardScreens: Flow<List<BoardScreenEntity>>
+
+    suspend fun loadDashBoardScreens()
 }
