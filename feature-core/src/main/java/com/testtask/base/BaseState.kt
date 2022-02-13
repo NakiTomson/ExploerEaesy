@@ -1,3 +1,6 @@
 package com.testtask.base
 
-interface BaseState
+interface BaseState {
+
+    val subStates: Array<out BaseState>
+}

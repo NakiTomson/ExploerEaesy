@@ -4,7 +4,9 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.testtask.base.BaseViewModel
 import com.testtask.core_ui.utils.SingleLiveEventFlow
-import com.testtask.dashboard_impl.ui.dashboard.state.DashBoardStateHandel
+import com.testtask.dashboard_impl.ui.dashboard.state.DashBoardEvent
+import com.testtask.dashboard_impl.ui.dashboard.state.DashBoardEvent.CloseDashBoard
+import com.testtask.dashboard_impl.ui.dashboard.state.DashBoardState.*
 import com.testtask.ext.into
 import com.testtask.ext.sendEvent
 import com.testtask.feature_core.AssistedSavedStateViewModelFactory
@@ -13,9 +15,8 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.shareIn
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class DashBoardViewModel @AssistedInject constructor(
@@ -23,53 +24,74 @@ class DashBoardViewModel @AssistedInject constructor(
     private val dashBoardInteractor: DashBoardInteractor,
 ) : BaseViewModel() {
 
-//    override val state = DashBoardStateHandel(dashBoardInteractor, viewModelScope)
+    private val _state = MutableStateFlow(RenderFullState())
+    override val state = _state.asStateFlow()
 
-    val dashBoardScreens =
-        dashBoardInteractor.dashBoardScreens.shareIn(viewModelScope, SharingStarted.Lazily, 1)
+    private val _event = SingleLiveEventFlow<DashBoardEvent>()
+    override val event = _event.singleEvent
 
-    private val _selectPage = MutableStateFlow(0)
-    val selectPage = _selectPage.asStateFlow()
-
-    private val _closeDashBoard = SingleLiveEventFlow<Unit>()
-    val closeDashBoard = _closeDashBoard.singleEvent
-
-    var selectedPagePosition = 0
+    private val dashBoardPosition: Int
+        get() = ((_state.value.subStates.firstOrNull { it is DashBoardPositionState }
+            ?: DashBoardPositionState(0)) as DashBoardPositionState).position
 
     init {
         loadDashBoard()
+        subscribeBoardScreens()
     }
 
     private fun loadDashBoard() {
         launch {
-            dashBoardInteractor.loadDashBoardScreens()
+            try {
+                into(_state) { RenderFullState(loadingState = DashBoardLoadingState(true)) }
+                dashBoardInteractor.loadDashBoardScreens()
+            } catch (e: Exception) {
+                into(_state) {
+                    RenderFullState(errorState = DashBoardErrorState(true))
+                }
+            }
+        }
+    }
+
+    private fun subscribeBoardScreens() {
+        viewModelScope.launch {
+            dashBoardInteractor.dashBoardScreens.collect {
+                into(_state) {
+                    RenderFullStateWithLatestCopy(
+                        _state.value,
+                        dashBoardLoadedState = DashBoardLoadedState(it),
+                        emptyState = DashBoardEmptyState(it.isEmpty())
+                    )
+                }
+            }
         }
     }
 
     fun onNextClicked() {
         launch {
-            if (selectedPagePosition < 2) {
+            if (dashBoardPosition < 2) {
                 incrementPosition()
                 return@launch
             }
-            sendEvent(_closeDashBoard)
+            sendEvent(_event) { CloseDashBoard() }
         }
     }
 
     fun onBackClicked() {
-        if (selectedPagePosition > 0) {
+        if (dashBoardPosition > 0) {
             decrementPosition()
         }
     }
 
     private fun incrementPosition() {
-        selectedPagePosition += 1
-        into(_selectPage) { selectedPagePosition }
+        launch {
+            into(_state) { RenderIndividuallyState(DashBoardPositionState(dashBoardPosition + 1)) }
+        }
     }
 
     private fun decrementPosition() {
-        selectedPagePosition -= 1
-        into(_selectPage) { selectedPagePosition }
+        launch {
+            into(_state) { RenderIndividuallyState(DashBoardPositionState(dashBoardPosition + 1)) }
+        }
     }
 
     @AssistedFactory

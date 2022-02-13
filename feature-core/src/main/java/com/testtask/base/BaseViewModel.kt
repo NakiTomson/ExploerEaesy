@@ -3,6 +3,7 @@ package com.testtask.base
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.Flow
 import kotlin.coroutines.CoroutineContext
 
 abstract class BaseViewModel : ViewModel(), CoroutineScope {
@@ -15,7 +16,9 @@ abstract class BaseViewModel : ViewModel(), CoroutineScope {
 
     final override val coroutineContext: CoroutineContext = scopeJob + Dispatchers.Main + errorHandler
 
-//    abstract val state: BaseState
+    abstract val state: Flow<BaseState?>
+
+    abstract val event: Flow<BaseEvent?>
 
     init {
         viewModelScope.coroutineContext.plus(this.coroutineContext)

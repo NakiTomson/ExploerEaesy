@@ -3,21 +3,24 @@ package com.testtask.dashboard_impl.ui.dashboard.view
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import com.testtask.base.BaseFragment
+import com.testtask.base.BaseState
 import com.testtask.dashboard_impl.R
 import com.testtask.dashboard_impl.adapter.ViewPagerAdapter
 import com.testtask.dashboard_impl.di.injector
 import com.testtask.dashboard_impl.ui.dashboard.model.DashBoardViewModel
+import com.testtask.dashboard_impl.ui.dashboard.state.DashBoardEvent.CloseDashBoard
+import com.testtask.dashboard_impl.ui.dashboard.state.DashBoardState.*
 import com.testtask.entity.BoardScreenEntity
+import com.testtask.ext.subscribeEvent
 import com.testtask.ext.subscribeState
 import kotlinx.android.synthetic.main.dashborad_fragment.*
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 
 class DashBoardFragment : BaseFragment<DashBoardViewModel>(R.layout.dashborad_fragment) {
 
@@ -32,20 +35,55 @@ class DashBoardFragment : BaseFragment<DashBoardViewModel>(R.layout.dashborad_fr
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setNavController()
+        setUiAction()
+        handlerUiState()
+        handlerUiEvent()
+    }
+
+    private fun setNavController() {
         navController = findNavController()
-        subscribeState(Lifecycle.State.RESUMED) {
-            dashBoardScreens.onEach { setupPagerViews(it) }.launchIn(this)
-            selectPage.onEach { setScreenPosition(it) }.launchIn(this)
-            closeDashBoard.onEach { closeDashBoard() }.launchIn(this)
-        }
-        tvNext.setOnClickListener {
-            viewModel.onNextClicked()
-        }
-        tvBack.setOnClickListener {
-            viewModel.onBackClicked()
+    }
+
+    private fun setUiAction() {
+        tvNext.setOnClickListener { viewModel.onNextClicked() }
+        tvBack.setOnClickListener { viewModel.onBackClicked() }
+    }
+
+    private fun handlerUiState() {
+        subscribeState(Lifecycle.State.RESUMED) { renderUi(this) }
+    }
+
+    private fun renderUi(baseState: BaseState?) {
+        baseState?.subStates?.forEach { renderUi(it) }
+        when (baseState) {
+            is DashBoardLoadedState -> setupPagerViews(baseState.onBoardingPages)
+            is DashBoardLoadingState -> showLoading(baseState.isLoading)
+            is DashBoardEmptyState -> showEmptyScreen(baseState.isEmpty)
+            is DashBoardErrorState -> showErrorScreen(baseState.isError)
+            is DashBoardPositionState -> setScreenPosition(baseState.position)
         }
     }
 
+    private fun handlerUiEvent() {
+        subscribeEvent(Lifecycle.State.RESUMED) {
+            when (this) {
+                is CloseDashBoard -> closeDashBoard()
+            }
+        }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        dashBoardProgress.isVisible = isLoading
+    }
+
+    private fun showEmptyScreen(isEmpty: Boolean) {
+
+    }
+
+    private fun showErrorScreen(isError: Boolean) {
+
+    }
 
     private fun setupPagerViews(onBoardingPages: List<BoardScreenEntity>) {
         plvCounter.setLinesCount(onBoardingPages.count())
@@ -71,6 +109,5 @@ class DashBoardFragment : BaseFragment<DashBoardViewModel>(R.layout.dashborad_fr
     companion object {
 
         fun create() = DashBoardFragment()
-
     }
 }
