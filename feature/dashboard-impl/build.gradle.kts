@@ -10,6 +10,7 @@ plugins {
 }
 
 dependencies {
+    implementation(project(mapOf("path" to ":network")))
     addCommonDependencies()
     addNavigationFragment()
     implementation(project(":feature-core"))
