@@ -53,7 +53,7 @@
         app:constraint_referenced_ids="ivError,tvErrorTitle,tvErrorDescription" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/buttonTryAgain"
+        android:id="@+id/errorButtonTryAgain"
         style="@style/MaterialButton.Default"
         android:layout_width="0dp"
         android:layout_height="60dp"

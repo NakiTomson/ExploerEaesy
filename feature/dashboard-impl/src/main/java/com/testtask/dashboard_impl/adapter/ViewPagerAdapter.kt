@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.testtask.dashboard_impl.ui.dashboard_page.view.BashBoardPageFragment
+import com.testtask.dashboard_impl.ui.dashboard_page.view.DashBoardPageFragment
 import com.testtask.entity.DashBoardScreenEntity
 
 class ViewPagerAdapter(
@@ -16,6 +16,6 @@ class ViewPagerAdapter(
     override fun getItemCount() = onBoardingPages.size
 
     override fun createFragment(position: Int): Fragment {
-        return BashBoardPageFragment.create(onBoardingPages[position])
+        return DashBoardPageFragment.create(onBoardingPages[position])
     }
 }

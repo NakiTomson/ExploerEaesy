@@ -8,7 +8,7 @@ import com.testtask.network.response.DashBoardScreenResponse
 
 fun List<DashBoardScreenResponse>.toResource(): Resource<List<DashBoardScreenEntity>> {
     val status = if (this.isEmpty()) Status.EMPTY else Status.COMPLETED
-    return Resource(Status.ERROR, this.toDashBoardScreensEntity())
+    return Resource(status, this.toDashBoardScreensEntity())
 }
 
 fun List<DashBoardScreenResponse>.toDashBoardScreensEntity(): List<DashBoardScreenEntity> {

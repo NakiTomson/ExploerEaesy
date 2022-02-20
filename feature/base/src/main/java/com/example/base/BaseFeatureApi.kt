@@ -1,12 +1,14 @@
 package com.example.base
 
+import com.example.params.EmptyDialogParams
+import com.example.params.ErrorDialogParams
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 interface BaseFeatureApi {
 
-    fun getErrorDialog(): BottomSheetDialogFragment
+    fun getErrorDialog(params: ErrorDialogParams? = null): BottomSheetDialogFragment
 
-    fun getEmptyDialog(): BottomSheetDialogFragment
+    fun getEmptyDialog(params: EmptyDialogParams? = null): BottomSheetDialogFragment
 
 
     companion object {

@@ -1,4 +1,4 @@
-package com.testtask.dashboard_impl.ui.dashboard.state
+package com.testtask.dashboard_impl.ui.dashboard.event
 
 import com.testtask.base.BaseEvent
 

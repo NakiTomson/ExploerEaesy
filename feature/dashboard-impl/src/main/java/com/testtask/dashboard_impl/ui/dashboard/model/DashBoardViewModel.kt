@@ -3,14 +3,14 @@ package com.testtask.dashboard_impl.ui.dashboard.model
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.testtask.base.BaseViewModel
+import com.testtask.base_ext.sendEvent
 import com.testtask.core_ui.utils.SingleLiveEventFlow
-import com.testtask.dashboard_impl.ui.dashboard.state.DashBoardEvent
-import com.testtask.dashboard_impl.ui.dashboard.state.DashBoardEvent.CloseDashBoard
+import com.testtask.dashboard_impl.ui.dashboard.event.DashBoardEvent
+import com.testtask.dashboard_impl.ui.dashboard.event.DashBoardEvent.CloseDashBoard
 import com.testtask.entity.DashBoardScreenEntity
 import com.testtask.entity.Resource.Status.*
-import com.testtask.base_ext.sendEvent
-import com.testtask.utils.AssistedSavedStateViewModelFactory
 import com.testtask.interactors.DashBoardInteractor
+import com.testtask.utils.AssistedSavedStateViewModelFactory
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
@@ -41,7 +41,7 @@ class DashBoardViewModel @AssistedInject constructor(
 
     val showDashBoardNavigation: Flow<Boolean> = _showDashBoards.map { it.isNotEmpty() }
 
-    private val dashBoardPosition: Int = 0
+    private var dashBoardPosition: Int = 0
 
     init {
         loadDashBoard()
@@ -57,7 +57,7 @@ class DashBoardViewModel @AssistedInject constructor(
     private fun subscribeBoardScreens() {
         viewModelScope.launch {
             dashBoardInteractor.dashBoardScreens.collect {
-//                if (it.status == COMPLETED) _showDashBoards.emit(it.data)
+                if (it.status == COMPLETED) _showDashBoards.emit(it.data)
                 _showLoading.emit(it.status == LOADING)
                 _showError.emit(it.status == ERROR)
                 _showEmpty.emit(it.status == EMPTY)
@@ -67,13 +67,15 @@ class DashBoardViewModel @AssistedInject constructor(
 
     private fun incrementPosition() {
         viewModelScope.launch {
-
+            dashBoardPosition += 1
+            _screenPosition.value = dashBoardPosition
         }
     }
 
     private fun decrementPosition() {
         viewModelScope.launch {
-
+            dashBoardPosition -= 1
+            _screenPosition.value = dashBoardPosition
         }
     }
 

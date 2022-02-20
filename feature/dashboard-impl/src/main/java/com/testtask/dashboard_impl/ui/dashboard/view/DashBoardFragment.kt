@@ -13,6 +13,7 @@ import androidx.navigation.navOptions
 import com.example.base.BaseFeatureApi
 import com.example.base.BaseFeatureApi.Companion.EMPTY_DIALOG_TAG
 import com.example.base.BaseFeatureApi.Companion.ERROR_DIALOG_TAG
+import com.example.controller.EmptyDialogListener
 import com.example.controller.ErrorDialogListener
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.testtask.base.BaseFragment
@@ -22,14 +23,15 @@ import com.testtask.dashboard_impl.R
 import com.testtask.dashboard_impl.adapter.ViewPagerAdapter
 import com.testtask.dashboard_impl.di.injector
 import com.testtask.dashboard_impl.ui.dashboard.model.DashBoardViewModel
-import com.testtask.dashboard_impl.ui.dashboard.state.DashBoardEvent.CloseDashBoard
+import com.testtask.dashboard_impl.ui.dashboard.event.DashBoardEvent.CloseDashBoard
 import com.testtask.entity.DashBoardScreenEntity
 import kotlinx.android.synthetic.main.dashborad_fragment.*
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
-class DashBoardFragment : BaseFragment<DashBoardViewModel>(R.layout.dashborad_fragment), ErrorDialogListener {
+class DashBoardFragment : BaseFragment<DashBoardViewModel>(R.layout.dashborad_fragment), ErrorDialogListener,
+    EmptyDialogListener {
 
     override val viewModel: DashBoardViewModel by viewModels()
 
@@ -142,5 +144,4 @@ class DashBoardFragment : BaseFragment<DashBoardViewModel>(R.layout.dashborad_fr
 
         fun create() = DashBoardFragment()
     }
-
 }
