@@ -1,10 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="no_result_title">No Result</string>
-    <string name="no_result_description">Sorry, there are no result. Please try again late</string>
 
-    <string name="error_title">Error Loading</string>
-    <string name="error_description">Sorry, something went wrong. Please try again</string>
-
-    <string name="try_again_text">Try Again</string>
 </resources>

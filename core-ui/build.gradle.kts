@@ -1,6 +1,7 @@
-import Libraries.addCommonDependencies
-import Libraries.addLifeCycler
-import Libraries.addNavigationFragment
+import Libraries.addCommonDependenciesApi
+import Libraries.addCommonUIDependenciesApi
+import Libraries.addLifecycleApi
+import Libraries.addNavigationFragmentApi
 
 plugins {
     id("com.android.library")
@@ -10,22 +11,9 @@ plugins {
 }
 
 dependencies {
-    addCommonDependencies()
-    addNavigationFragment()
-    addLifeCycler()
-    api(Libraries.appCompat)
-    api(Libraries.fragmentKtx)
-    api(Libraries.material)
-    api(Libraries.constraintLayout)
-    api(Libraries.recyclerView)
-    api(Libraries.viewPager2)
-    api(Libraries.circleImageView)
-    api(Libraries.kohii_core)
-    api(Libraries.kohii_exoplayer)
-    api(Libraries.swipeRefreshLayout)
-    api(Libraries.exoplayer)
-    api(Libraries.pinView)
-    api(Libraries.decoro)
-    debugApi(Libraries.leakCanary)
+    addCommonDependenciesApi()
+    addNavigationFragmentApi()
+    addCommonUIDependenciesApi()
+    addLifecycleApi()
     api(project(":entity"))
 }

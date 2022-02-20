@@ -23,3 +23,5 @@ include ':feature'
 include ':app'
 rootProject.name = "Exploer Eaesy"
 include ':feature:user-impl'
+include ':feature:base-impl'
+include ':feature:base'

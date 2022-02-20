@@ -11,12 +11,15 @@ import kotlinx.android.synthetic.main.fragment_bashboard_page.*
 
 class BashBoardPageFragment : Fragment(R.layout.fragment_bashboard_page) {
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val onBoardingPage =
-            arguments?.getParcelable<DashBoardScreenEntity>(ARG_PAGE_CONTENT) ?: error("OnBoarding page should has an argument")
-        onBoardingPage.apply {
+        requireArguments().getParcelable<DashBoardScreenEntity>(ARG_PAGE_CONTENT)?.let {
+            setContent(it)
+        }
+    }
+
+    private fun setContent(dashBoardScreenEntity: DashBoardScreenEntity) {
+        dashBoardScreenEntity.apply {
             tvTitle.text = title
             tvContent.text = text
             media.let {

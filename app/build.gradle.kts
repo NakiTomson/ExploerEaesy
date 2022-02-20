@@ -36,6 +36,7 @@ dependencies {
     implementation(project(":feature:navigation-impl"))
     implementation(project(":feature:home-impl"))
     implementation(project(":feature:user-impl"))
+    implementation(project(":feature:base-impl"))
 }
 
 

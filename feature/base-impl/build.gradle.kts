@@ -6,13 +6,12 @@ plugins {
     kotlin("android")
     kotlin("kapt")
     kotlin("android.extensions")
-    id("androidx.navigation.safeargs.kotlin")
 }
 
 dependencies {
     addCommonDependencies()
     addNavigationFragment()
     implementation(project(":feature-core"))
-    implementation(project(":network"))
-    implementation(project(":feature:base"))
+    api(project(":feature:base"))
+
 }

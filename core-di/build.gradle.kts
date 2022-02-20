@@ -14,4 +14,5 @@ dependencies {
     implementation(project(":entity"))
     implementation(project(":ui-kit"))
     implementation(project(":network"))
+    implementation(project(":feature:base"))
 }

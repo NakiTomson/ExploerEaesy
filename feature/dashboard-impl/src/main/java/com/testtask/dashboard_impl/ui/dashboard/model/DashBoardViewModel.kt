@@ -36,9 +36,6 @@ class DashBoardViewModel @AssistedInject constructor(
     private val _screenPosition = MutableStateFlow(0)
     val screenPosition: Flow<Int> = _screenPosition.asStateFlow()
 
-    private val _refreshButton = MutableStateFlow(false)
-    val refreshButton: Flow<Boolean> = _refreshButton.asStateFlow()
-
     private val _showDashBoards: MutableStateFlow<List<DashBoardScreenEntity>> = MutableStateFlow(listOf())
     val showDashBoards: Flow<List<DashBoardScreenEntity>> = _showDashBoards.asStateFlow().filter { it.isNotEmpty() }
 
@@ -64,7 +61,6 @@ class DashBoardViewModel @AssistedInject constructor(
                 _showLoading.emit(it.status == LOADING)
                 _showError.emit(it.status == ERROR)
                 _showEmpty.emit(it.status == EMPTY)
-                _refreshButton.emit(it.status == EMPTY || it.status == ERROR)
             }
         }
     }
@@ -97,7 +93,7 @@ class DashBoardViewModel @AssistedInject constructor(
         }
     }
 
-    fun onButtonTryAgainClicked() {
+    fun onLoadTryAgain() {
         loadDashBoard()
     }
 
