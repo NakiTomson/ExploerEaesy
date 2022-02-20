@@ -1,4 +1,4 @@
-package com.testtask.feature_core
+package com.testtask.utils
 
 import android.content.Context
 import com.testtask.core_di.AppProvider

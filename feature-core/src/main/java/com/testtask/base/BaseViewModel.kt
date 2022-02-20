@@ -6,7 +6,7 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
 import kotlin.coroutines.CoroutineContext
 
-abstract class BaseViewModel : ViewModel(), CoroutineScope {
+abstract class BaseViewModel : ViewModel() {
 
     private val scopeJob: Job = SupervisorJob()
 
@@ -14,15 +14,12 @@ abstract class BaseViewModel : ViewModel(), CoroutineScope {
         handleError(throwable)
     }
 
-    final override val coroutineContext: CoroutineContext = scopeJob + Dispatchers.Main + errorHandler
-
-    abstract val state: Flow<BaseState?>
+    private val coroutineContext: CoroutineContext = scopeJob + Dispatchers.Main + errorHandler
 
     abstract val event: Flow<BaseEvent?>
 
-    init {
-        viewModelScope.coroutineContext.plus(this.coroutineContext)
-    }
+    protected val CoroutineScope.launch: (block: suspend CoroutineScope.() -> Unit) -> Job
+        get() = { viewModelScope.launch(this@BaseViewModel.coroutineContext) { it.invoke(this) } }
 
     protected fun handleError(throwable: Throwable) {
     }

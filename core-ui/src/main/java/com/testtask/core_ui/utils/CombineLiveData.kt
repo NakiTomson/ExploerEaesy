@@ -17,10 +17,3 @@ fun <T, K, R> LiveData<T>.combineWith(
     }
     return result
 }
-
-//fun <T, K, R> Flow<T>.combineFlow(
-//    flow: Flow<K>,
-//): Flow<R> {
-//
-//    return result
-//}

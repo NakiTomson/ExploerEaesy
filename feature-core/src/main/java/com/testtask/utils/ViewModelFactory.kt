@@ -1,14 +1,11 @@
-package com.testtask.feature_core
+package com.testtask.utils
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.AbstractSavedStateViewModelFactory
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.savedstate.SavedStateRegistryOwner
-import javax.inject.Inject
-import javax.inject.Provider
 
 class ViewModelFactory<T: ViewModel>(
     savedStateRegistryOwner: SavedStateRegistryOwner,

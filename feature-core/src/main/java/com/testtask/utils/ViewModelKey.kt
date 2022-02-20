@@ -1,4 +1,4 @@
-package com.testtask.feature_core
+package com.testtask.utils
 
 import androidx.lifecycle.ViewModel
 import dagger.MapKey

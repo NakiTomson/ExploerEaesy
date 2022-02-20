@@ -5,7 +5,7 @@ import kotlinx.android.parcel.Parcelize
 
 
 @Parcelize
-data class BoardScreenEntity(
+data class DashBoardScreenEntity(
     val title: String,
     val text: String,
     val media: String

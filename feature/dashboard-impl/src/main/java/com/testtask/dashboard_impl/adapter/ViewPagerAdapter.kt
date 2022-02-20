@@ -5,10 +5,10 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.testtask.dashboard_impl.ui.dashboard_page.view.BashBoardPageFragment
-import com.testtask.entity.BoardScreenEntity
+import com.testtask.entity.DashBoardScreenEntity
 
 class ViewPagerAdapter(
-    private val onBoardingPages: List<BoardScreenEntity>,
+    private val onBoardingPages: List<DashBoardScreenEntity>,
     childFragmentManager: FragmentManager,
     lifecycle: Lifecycle
 ) : FragmentStateAdapter(childFragmentManager, lifecycle) {

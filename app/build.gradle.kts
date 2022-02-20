@@ -1,3 +1,5 @@
+import AndroidSdk.applicationId
+import AndroidSdk.versionName
 import Libraries.addCommonDependencies
 import Libraries.addNavigationFragment
 
@@ -14,9 +16,9 @@ plugins {
 
 android {
     defaultConfig {
-        applicationId(AndroidSdk.applicationId)
-        versionCode(AndroidSdk.verstionCode)
-        versionName(AndroidSdk.versionName)
+        applicationId = AndroidSdk.applicationId
+        versionCode = AndroidSdk.verstionCode
+        versionName = AndroidSdk.versionName
     }
 }
 

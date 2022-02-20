@@ -1,12 +1,10 @@
-package com.testtask.feature_core
+package com.testtask.utils
 
 import android.os.Bundle
 import androidx.lifecycle.*
 import androidx.savedstate.SavedStateRegistryOwner
 import dagger.Reusable
 import javax.inject.Inject
-import javax.inject.Provider
-import kotlin.reflect.KClass
 
 
 @Reusable

@@ -1,8 +1,8 @@
 package com.testtask.navigation_impl.di
 
 import androidx.lifecycle.ViewModel
-import com.testtask.feature_core.AssistedSavedStateViewModelFactory
-import com.testtask.feature_core.ViewModelKey
+import com.testtask.utils.AssistedSavedStateViewModelFactory
+import com.testtask.utils.ViewModelKey
 import com.testtask.navigation_impl.ui.viewModel.NavigationViewModel
 import dagger.Binds
 import dagger.Module

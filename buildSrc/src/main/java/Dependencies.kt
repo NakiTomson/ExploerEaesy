@@ -16,7 +16,7 @@ object AndroidSdk {
 object BuildPlugins {
 
     object Versions {
-        const val buildToolsVersion = "4.1.2"
+        const val buildToolsVersion = "7.0.0"
         const val googleServicesVersion = "4.3.4"
         const val appdistributionVersion = "2.0.1"
         const val crashlyticsVersion = "2.3.0"
