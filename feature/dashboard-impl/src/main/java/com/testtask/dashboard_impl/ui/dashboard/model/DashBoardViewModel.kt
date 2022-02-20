@@ -17,7 +17,7 @@ import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.shareIn
 import kotlinx.coroutines.launch
 
 class DashBoardViewModel @AssistedInject constructor(
@@ -25,8 +25,10 @@ class DashBoardViewModel @AssistedInject constructor(
     private val dashBoardInteractor: DashBoardInteractor,
 ) : BaseViewModel() {
 
-    private val _state = MutableStateFlow(RenderFullState())
-    override val state = _state.asStateFlow()
+//    override val state = DashBoardStateHandel(dashBoardInteractor, viewModelScope)
+
+    val dashBoardScreens =
+        dashBoardInteractor.dashBoardScreens.shareIn(viewModelScope, SharingStarted.Lazily, 1)
 
     private val _event = SingleLiveEventFlow<DashBoardEvent>()
     override val event = _event.singleEvent
@@ -41,57 +43,35 @@ class DashBoardViewModel @AssistedInject constructor(
     }
 
     private fun loadDashBoard() {
-        viewModelScope.launch {
-            try {
-                into(_state) { RenderFullState(loadingState = DashBoardLoadingState(true)) }
-                dashBoardInteractor.loadDashBoardScreens()
-            } catch (e: ServerError) {
-                into(_state) {
-                    RenderFullState(errorState = DashBoardErrorState(true))
-                }
-            }
-        }
-    }
-
-    private fun subscribeBoardScreens() {
-        viewModelScope.launch {
-            dashBoardInteractor.dashBoardScreens.collect {
-                into(_state) {
-                    RenderFullState(
-                        dashBoardLoadedState = DashBoardLoadedState(it),
-                        emptyState = DashBoardEmptyState(it.isEmpty())
-                    )
-                }
-            }
+        launch {
+            dashBoardInteractor.loadDashBoardScreens()
         }
     }
 
     fun onNextClicked() {
         launch {
-            if (dashBoardPosition < 2) {
+            if (selectedPagePosition < 2) {
                 incrementPosition()
                 return@launch
             }
-            sendEvent(_event) { CloseDashBoard() }
+            sendEvent(_closeDashBoard)
         }
     }
 
     fun onBackClicked() {
-        if (dashBoardPosition > 0) {
+        if (selectedPagePosition > 0) {
             decrementPosition()
         }
     }
 
     private fun incrementPosition() {
-        launch {
-            into(_state) { RenderIndividuallyState(DashBoardPositionState(dashBoardPosition + 1)) }
-        }
+        selectedPagePosition += 1
+        into(_selectPage) { selectedPagePosition }
     }
 
     private fun decrementPosition() {
-        launch {
-            into(_state) { RenderIndividuallyState(DashBoardPositionState(dashBoardPosition - 1)) }
-        }
+        selectedPagePosition -= 1
+        into(_selectPage) { selectedPagePosition }
     }
 
     @AssistedFactory
