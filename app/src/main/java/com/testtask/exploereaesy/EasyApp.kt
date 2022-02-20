@@ -1,10 +1,10 @@
 package com.testtask.exploereaesy
 
 import android.app.Application
-import android.content.Context
 import com.testtask.core_di.AppProvider
 import com.testtask.core_di.ApplicationProvider
 import com.testtask.exploereaesy.di.AppComponent
+import com.testtask.exploereaesy.di.ConfigurationComponent
 import com.testtask.exploereaesy.di.ContextComponent
 import com.testtask.interactors_impl.di.InteractorsComponent
 import com.testtask.network_impl.di.NetworkComponent
@@ -22,9 +22,12 @@ class EasyApp : Application(), ApplicationProvider {
 
     private fun setupDI() {
         val contextComponent = ContextComponent.create(this)
-        val persistenceComponent = PersistenceComponent.create(contextComponent)
+        val configurationComponent = ConfigurationComponent.create(contextComponent)
+
+        val persistenceComponent = PersistenceComponent.create(contextComponent, configurationComponent)
         val networkComponent = NetworkComponent.create(
-            contextComponent
+            contextComponent,
+            configurationComponent
         )
         val repositoriesComponent = RepositoriesComponent.create(
             networkComponent,

@@ -5,11 +5,6 @@
     android:id="@+id/main_graph"
     app:startDestination="@id/splashFragment">
 
-    <activity
-        android:id="@+id/mainActivity"
-        android:name="com.testtask.exploereaesy.view.MainActivity"
-        tools:layout="@layout/activity_main" />
-
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.testtask.splash_impl.ui.view.SplashFragment"
