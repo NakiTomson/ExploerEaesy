@@ -10,7 +10,9 @@ import com.testtask.interactors.SplashInteractor
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.shareIn
 
 class SplashViewModel @AssistedInject constructor(
@@ -21,9 +23,10 @@ class SplashViewModel @AssistedInject constructor(
     private val _event = SingleLiveEventFlow<BaseEvent>()
     override val event = _event.singleEvent
 
-    val openDashBoard = splashInteractor.openDashBoardFlow.shareIn(
-        viewModelScope, started = SharingStarted.Lazily, 1
-    )
+    val openDashBoard = flow {
+        delay(2000)
+        emit(Unit)
+    }
 
 
     @AssistedFactory

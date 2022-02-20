@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!--   контейнер приложения в Activity -->
+    <item name="activity_nav_host" type="id" tools:ignore="ResourceName" />
+
+    <!--   контейнер c BottomNavigation -->
+    <item name="nav_host_container" type="id" tools:ignore="ResourceName" />
+
+    <!-- нафигационный граф   -->
+    <item name="navigation_graph" type="id" tools:ignore="ResourceName" />
+
+    <!-- графы для нафигации в BottomNavigation -->
+    <item name="home_graph" type="id" tools:ignore="ResourceName" />
+    <item name="user_graph" type="id" tools:ignore="ResourceName" />
+
+
+    <!-- top destinations -->
+    <item name="splashFragment" type="id" tools:ignore="ResourceName" />
+    <item name="dashBoardFragment" type="id" tools:ignore="ResourceName" />
+    <item name="navigationFragment" type="id" tools:ignore="ResourceName" />
+
+    <!-- navigation destinations -->
+    <item name="homeFragment" type="id" tools:ignore="ResourceName" />
+    <item name="userFragment" type="id" tools:ignore="ResourceName" />
+
+</resources>

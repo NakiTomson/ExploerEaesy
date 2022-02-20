@@ -19,6 +19,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.testtask.base.BaseFragment
 import com.testtask.base_ext.subscribeEvent
 import com.testtask.base_ext.subscribeState
+import com.testtask.core_ui.navigation.findTopNavController
+import com.testtask.core_ui.navigation.navigateInNavigationFragment
 import com.testtask.dashboard_impl.R
 import com.testtask.dashboard_impl.adapter.ViewPagerAdapter
 import com.testtask.dashboard_impl.di.injector
@@ -35,8 +37,6 @@ class DashBoardFragment : BaseFragment<DashBoardViewModel>(R.layout.dashborad_fr
 
     override val viewModel: DashBoardViewModel by viewModels()
 
-    private var navController: NavController? = null
-
     @Inject
     lateinit var cameraFeatureApi: BaseFeatureApi
 
@@ -47,14 +47,9 @@ class DashBoardFragment : BaseFragment<DashBoardViewModel>(R.layout.dashborad_fr
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setNavController()
         setUiAction()
         handlerUiEvent()
         handlerUiState()
-    }
-
-    private fun setNavController() {
-        navController = findNavController()
     }
 
     private fun setUiAction() {
@@ -130,10 +125,7 @@ class DashBoardFragment : BaseFragment<DashBoardViewModel>(R.layout.dashborad_fr
     }
 
     private fun closeDashBoard() {
-        val navOptions = navOptions {
-            popUpTo(R.id.navigationFragment) { inclusive = true }
-        }
-        navController?.navigate(R.id.navigationFragment, null, navOptions)
+        findTopNavController().navigateInNavigationFragment()
     }
 
     override fun closeErrorFragment() {

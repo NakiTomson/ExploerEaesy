@@ -16,9 +16,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         injectDependencies()
-        navController = (supportFragmentManager.findFragmentById(
-            R.id.activity_nav_host
-        ) as NavHostFragment).navController
+        navController = (supportFragmentManager.findFragmentById(R.id.activity_nav_host) as NavHostFragment).navController
     }
 
     private fun injectDependencies() {

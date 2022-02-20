@@ -3,6 +3,7 @@ package com.testtask.base
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.HasDefaultViewModelProviderFactory
 import androidx.lifecycle.ViewModelProvider
+import com.testtask.core_ui.utils.NetworkConnection
 import com.testtask.utils.InjectingSavedStateViewModelFactory
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
@@ -31,6 +32,12 @@ abstract class BaseFragment<out VM : BaseViewModel>(splashFragment: Int) : Fragm
         defaultViewModelFactory.get().create(this, arguments)
 
     protected fun handleError(throwable: Throwable) {
+        //Todo Toast с причиной ошибки
+    }
 
+    private fun changeNetworkState() {
+        NetworkConnection(context?.applicationContext!!).observe(viewLifecycleOwner) {
+            //Todo тоаст о потере соединения
+        }
     }
 }
