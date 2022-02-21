@@ -7,15 +7,9 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavController
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.navOptions
 import com.example.base.BaseFeatureApi
-import com.example.base.BaseFeatureApi.Companion.EMPTY_DIALOG_TAG
-import com.example.base.BaseFeatureApi.Companion.ERROR_DIALOG_TAG
 import com.example.controller.EmptyDialogListener
 import com.example.controller.ErrorDialogListener
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.testtask.base.BaseFragment
 import com.testtask.base_ext.subscribeEvent
 import com.testtask.base_ext.subscribeState
@@ -24,8 +18,8 @@ import com.testtask.core_ui.navigation.navigateInNavigationFragment
 import com.testtask.dashboard_impl.R
 import com.testtask.dashboard_impl.adapter.ViewPagerAdapter
 import com.testtask.dashboard_impl.di.injector
-import com.testtask.dashboard_impl.ui.dashboard.model.DashBoardViewModel
 import com.testtask.dashboard_impl.ui.dashboard.event.DashBoardEvent.CloseDashBoard
+import com.testtask.dashboard_impl.ui.dashboard.model.DashBoardViewModel
 import com.testtask.entity.DashBoardScreenEntity
 import kotlinx.android.synthetic.main.dashborad_fragment.*
 import kotlinx.coroutines.flow.launchIn
@@ -38,7 +32,7 @@ class DashBoardFragment : BaseFragment<DashBoardViewModel>(R.layout.dashborad_fr
     override val viewModel: DashBoardViewModel by viewModels()
 
     @Inject
-    lateinit var cameraFeatureApi: BaseFeatureApi
+    lateinit var baseFeatureApi: BaseFeatureApi
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -81,27 +75,11 @@ class DashBoardFragment : BaseFragment<DashBoardViewModel>(R.layout.dashborad_fr
     }
 
     private fun showErrorScreen(isError: Boolean) {
-        childFragmentManager.findFragmentByTag(ERROR_DIALOG_TAG).let {
-            if (isError.not()) {
-                (it as? BottomSheetDialogFragment)?.dismiss()
-                return
-            }
-            if (it != null) return
-        }
-        val dialogFragment = cameraFeatureApi.getErrorDialog()
-        dialogFragment.show(childFragmentManager, ERROR_DIALOG_TAG)
+        baseFeatureApi.showErrorDialogOrClose(isError, childFragmentManager)
     }
 
     private fun showEmptyScreen(isEmpty: Boolean) {
-        childFragmentManager.findFragmentByTag(EMPTY_DIALOG_TAG).let {
-            if (isEmpty.not()) {
-                (it as? BottomSheetDialogFragment)?.dismiss()
-                return
-            }
-            if (it != null) return
-        }
-        val dialogFragment = cameraFeatureApi.getEmptyDialog()
-        dialogFragment.show(childFragmentManager, EMPTY_DIALOG_TAG)
+        baseFeatureApi.showEmptyDialogOrClose(isEmpty, childFragmentManager)
     }
 
     private fun setupPagerViews(onBoardingPages: List<DashBoardScreenEntity>) {
@@ -126,6 +104,10 @@ class DashBoardFragment : BaseFragment<DashBoardViewModel>(R.layout.dashborad_fr
 
     private fun closeDashBoard() {
         findTopNavController().navigateInNavigationFragment()
+    }
+
+    override fun closeEmptyFragment() {
+        viewModel.onLoadTryAgain()
     }
 
     override fun closeErrorFragment() {

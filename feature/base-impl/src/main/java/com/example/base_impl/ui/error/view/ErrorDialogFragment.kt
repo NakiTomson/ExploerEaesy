@@ -90,7 +90,7 @@ class ErrorDialogFragment :
     private fun handlerUiState() {
         subscribeState(Lifecycle.State.CREATED) {
             paramsEmptyDialog.onEach { params ->
-                params?.let { setErrorData(it) }
+                setErrorData(params)
             }.launchIn(viewModelScope)
         }
     }

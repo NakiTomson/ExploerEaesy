@@ -13,6 +13,7 @@ import dagger.assisted.AssistedInject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.mapNotNull
 
 class ErrorDialogViewModel @AssistedInject constructor(
     @Assisted savedStateHandle: SavedStateHandle
@@ -21,14 +22,11 @@ class ErrorDialogViewModel @AssistedInject constructor(
     private val _event = SingleLiveEventFlow<ErrorEvent>()
     override val event = _event.singleEvent
 
-    private val _paramsEmptyDialog: MutableStateFlow<ErrorDialogParams?> = MutableStateFlow(null)
-    val paramsEmptyDialog: Flow<ErrorDialogParams?> = _paramsEmptyDialog.asStateFlow()
+    private val _paramsEmptyDialog: MutableStateFlow<ErrorDialogParams?> =
+        MutableStateFlow(savedStateHandle.get(ARG_ERROR_PARAMS) as? ErrorDialogParams)
 
-    private val params: ErrorDialogParams? = savedStateHandle.get(ARG_ERROR_PARAMS) as? ErrorDialogParams
+    val paramsEmptyDialog: Flow<ErrorDialogParams> = _paramsEmptyDialog.asStateFlow().mapNotNull { it }
 
-    init {
-        params?.let { _paramsEmptyDialog.value = it }
-    }
 
     @AssistedFactory
     interface Factory : AssistedSavedStateViewModelFactory<ErrorDialogViewModel>

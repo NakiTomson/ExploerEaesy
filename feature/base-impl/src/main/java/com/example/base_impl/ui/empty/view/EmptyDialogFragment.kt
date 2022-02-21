@@ -68,7 +68,7 @@ class EmptyDialogFragment :
 
     private fun setUpUiAction() {
         emptyButtonTryAgain.setOnClickListener {
-            emptyDialogListener?.closeErrorFragment()
+            emptyDialogListener?.closeEmptyFragment()
             dismiss()
         }
     }
@@ -82,14 +82,14 @@ class EmptyDialogFragment :
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
         }
         dialog?.setOnCancelListener {
-            emptyDialogListener?.closeErrorFragment()
+            emptyDialogListener?.closeEmptyFragment()
         }
     }
 
     private fun handlerUiState() {
         subscribeState(Lifecycle.State.CREATED) {
             paramsEmptyDialog.onEach { params ->
-                params?.let { setEmptyData(it) }
+                setEmptyData(params)
             }.launchIn(viewModelScope)
         }
     }
