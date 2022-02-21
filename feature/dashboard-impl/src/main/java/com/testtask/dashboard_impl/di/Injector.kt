@@ -1,10 +1,7 @@
 package com.testtask.dashboard_impl.di
 
 import androidx.fragment.app.Fragment
-import com.testtask.core_di.ApplicationProvider
+import com.testtask.utils.appComponent
 
 val Fragment.injector: DashBoardComponent
-    get() {
-        val appProvider = (requireActivity().application as ApplicationProvider).appProvider
-        return DashBoardComponent.create(appProvider)
-    }
+    get() = DashBoardComponent.create(requireContext().appComponent)

@@ -7,5 +7,6 @@ import androidx.room.PrimaryKey
 data class AnonymousUserDb(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-    val onBoarded: Boolean?
+    val onBoarded: Boolean?,
+    val anonymousToken: String?
 )

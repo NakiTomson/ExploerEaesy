@@ -5,9 +5,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.example.user.R
-import com.example.user.di.injector
 import com.example.user.ui.user.model.UserViewModel
-import com.testtask.feature_core.lazyViewModel
+import com.example.user.ui.user.model.UserViewModel.Companion.injector
+import com.testtask.utils.lazyViewModel
 
 class UserFragment : Fragment(R.layout.user_fragment_user) {
 

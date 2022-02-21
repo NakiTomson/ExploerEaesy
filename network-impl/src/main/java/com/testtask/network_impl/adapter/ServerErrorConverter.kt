@@ -2,7 +2,7 @@ package com.testtask.network_impl.adapter
 
 import android.util.Log
 import com.google.gson.GsonBuilder
-import com.testtask.network.errors.ServerError
+import com.testtask.entity.ServerError
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.ResponseBody
 import okhttp3.ResponseBody.Companion.toResponseBody

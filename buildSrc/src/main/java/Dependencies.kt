@@ -2,7 +2,7 @@
 
 import org.gradle.api.artifacts.dsl.DependencyHandler
 
-const val kotlinVersion = "1.5.20"
+const val kotlinVersion = "1.6.10"
 
 object AndroidSdk {
     const val applicationId = "com.testtask.exploereaesy"
@@ -16,7 +16,7 @@ object AndroidSdk {
 object BuildPlugins {
 
     object Versions {
-        const val buildToolsVersion = "4.1.2"
+        const val buildToolsVersion = "7.0.0"
         const val googleServicesVersion = "4.3.4"
         const val appdistributionVersion = "2.0.1"
         const val crashlyticsVersion = "2.3.0"
@@ -38,7 +38,7 @@ object Libraries {
 
     object Versions {
         const val dagger = "2.40"
-        const val assistedInject = "0.5.2"
+        const val daggerCompiler = "2.40"
         const val hilt = "2.40"
         const val coroutines = "1.4.3"
         const val appCompat = "1.3.0"
@@ -93,9 +93,7 @@ object Libraries {
 
     //Dagger
     const val dagger = "com.google.dagger:dagger:${Versions.dagger}"
-    const val daggerCompiler = "com.google.dagger:dagger-compiler:${Versions.dagger}"
-    const val assistedInjectAnnotations = "com.squareup.inject:assisted-inject-annotations-dagger2:${Versions.assistedInject}"
-    const val assistedInjectProcessor = "com.squareup.inject:assisted-inject-processor-dagger2:${Versions.assistedInject}"
+    const val daggerCompiler = "com.google.dagger:dagger-compiler:${Versions.daggerCompiler}"
 
     //Hilt
     const val hilt = "com.google.dagger:hilt-android:${Versions.hilt}"
@@ -106,6 +104,7 @@ object Libraries {
     const val viewModelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
     const val viewModelSavedState = "androidx.lifecycle:lifecycle-viewmodel-savedstate:${Versions.lifecycle}"
     const val liveDataKtx = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
+    const val lifecycleKtx = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle}"
     const val composeLifecycle = "androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.lifecycle}"
     const val lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime:${Versions.lifecycle}"
     const val lifecycleCompiler = "androidx.lifecycle:lifecycle-compiler:${Versions.lifecycle}"
@@ -215,6 +214,19 @@ object Libraries {
         implementation(navigationDynamic)
     }
 
+    fun DependencyHandler.addNavigationFragmentApi() {
+        api(fragment)
+        api(fragmentKtx)
+        api(navigationFragmentRuntime)
+        api(navigationFragmentRuntime)
+        api(navigationFragmentRuntimektx)
+        api(navigationFragment)
+        api(navigationFragmenktx)
+        api(navigationUi)
+        api(navigationUiktx)
+        api(navigationDynamic)
+    }
+
     fun DependencyHandler.addRoom() {
         implementation(room)
         implementation(roomKts)
@@ -222,17 +234,20 @@ object Libraries {
         kapt(roomCompiler)
     }
 
-    fun DependencyHandler.addLifeCycler() {
+    fun DependencyHandler.addLifecycleApi() {
+//        implementation(composeLifecycle)
+        api(lifecycleRuntime)
+        api(lifecycleKtx)
+//        implementation(lifecycleJava8)
+//        implementation(lifecycleService)
+//        implementation(lifecycleProcess)
+//        implementation(lifecycleReactivestreams)
+        kapt(lifecycleCompiler)
+    }
+
+    fun DependencyHandler.addViewModel() {
         implementation(viewModelKtx)
         implementation(viewModelSavedState)
-        implementation(liveDataKtx)
-        implementation(composeLifecycle)
-        implementation(lifecycleRuntime)
-        implementation(lifecycleJava8)
-        implementation(lifecycleService)
-        implementation(lifecycleProcess)
-        implementation(lifecycleReactivestreams)
-        kapt(lifecycleCompiler)
     }
 
     fun DependencyHandler.addCommonDependencies() {
@@ -243,11 +258,39 @@ object Libraries {
         implementation(dagger)
         implementation(glide)
         implementation(material)
-        compileOnly(assistedInjectAnnotations)
-        kapt(assistedInjectProcessor)
         kapt(daggerCompiler)
         kapt(glideCompiler)
     }
+
+    fun DependencyHandler.addCommonDependenciesApi() {
+        api(kotlin)
+        api(coroutines)
+        api(coroutines_android)
+        api(coreKtx)
+        api(dagger)
+        api(glide)
+        api(material)
+        kapt(daggerCompiler)
+        kapt(glideCompiler)
+    }
+
+    fun DependencyHandler.addCommonUIDependenciesApi() {
+        api(appCompat)
+        api(fragmentKtx)
+        api(material)
+        api(constraintLayout)
+        api(recyclerView)
+        api(viewPager2)
+        api(circleImageView)
+        api(kohii_core)
+        api(kohii_exoplayer)
+        api(swipeRefreshLayout)
+        api(exoplayer)
+        api(pinView)
+        api(decoro)
+        debugApi(leakCanary)
+    }
+
 
     fun DependencyHandler.addHilt() {
         implementation(hilt)
@@ -268,3 +311,4 @@ private fun DependencyHandler.api(depName: String) = add("api", depName)
 private fun DependencyHandler.implementation(depName: Any) = add("implementation", depName)
 private fun DependencyHandler.kapt(depName: Any) = add("kapt", depName)
 private fun DependencyHandler.compileOnly(depName: Any) = add("compileOnly", depName)
+private fun DependencyHandler.debugApi(dependencyNotation: Any) = add("debugApi", dependencyNotation)

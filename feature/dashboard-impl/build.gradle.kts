@@ -13,4 +13,6 @@ dependencies {
     addCommonDependencies()
     addNavigationFragment()
     implementation(project(":feature-core"))
+    implementation(project(":network"))
+    implementation(project(":feature:base"))
 }

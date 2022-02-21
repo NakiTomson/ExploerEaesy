@@ -1,17 +1,24 @@
 package com.testtask.navigation_impl.ui.viewModel
 
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
-import com.squareup.inject.assisted.Assisted
-import com.squareup.inject.assisted.AssistedInject
-import com.testtask.feature_core.AssistedSavedStateViewModelFactory
+import com.testtask.base.BaseEvent
+import com.testtask.base.BaseViewModel
+import com.testtask.core_ui.utils.SingleLiveEventFlow
+import com.testtask.utils.AssistedSavedStateViewModelFactory
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 
 class NavigationViewModel @AssistedInject constructor(
     @Assisted savedStateHandle: SavedStateHandle
-) : ViewModel() {
+) : BaseViewModel() {
 
-    @AssistedInject.Factory
-    interface Factory : AssistedSavedStateViewModelFactory<NavigationViewModel> {
-        override fun create(savedStateHandle: SavedStateHandle): NavigationViewModel
-    }
+
+    private val _event = SingleLiveEventFlow<BaseEvent>()
+    override val event = _event.singleEvent
+
+
+    @AssistedFactory
+    interface Factory : AssistedSavedStateViewModelFactory<NavigationViewModel>
+
 }

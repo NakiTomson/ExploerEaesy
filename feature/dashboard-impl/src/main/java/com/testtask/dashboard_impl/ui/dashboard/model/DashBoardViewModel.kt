@@ -1,63 +1,104 @@
 package com.testtask.dashboard_impl.ui.dashboard.model
 
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.squareup.inject.assisted.Assisted
-import com.squareup.inject.assisted.AssistedInject
-import com.testtask.feature_core.AssistedSavedStateViewModelFactory
+import com.testtask.base.BaseViewModel
+import com.testtask.base_ext.sendEvent
+import com.testtask.core_ui.utils.SingleLiveEventFlow
+import com.testtask.dashboard_impl.ui.dashboard.event.DashBoardEvent
+import com.testtask.dashboard_impl.ui.dashboard.event.DashBoardEvent.CloseDashBoard
+import com.testtask.entity.DashBoardScreenEntity
+import com.testtask.entity.Resource.Status.*
 import com.testtask.interactors.DashBoardInteractor
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.shareIn
-import kotlinx.coroutines.launch
+import com.testtask.utils.AssistedSavedStateViewModelFactory
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
+import kotlinx.coroutines.flow.*
 
 class DashBoardViewModel @AssistedInject constructor(
     @Assisted private val savedStateHandle: SavedStateHandle,
     private val dashBoardInteractor: DashBoardInteractor,
-) : ViewModel() {
+) : BaseViewModel() {
 
-    val dashBoardScreens = dashBoardInteractor.dashBoardScreens.shareIn(
-        viewModelScope, started = SharingStarted.Lazily, 1
-    )
+    private val _event = SingleLiveEventFlow<DashBoardEvent>()
+    override val event = _event.singleEvent
 
-    private val _selectPageFlow = MutableStateFlow(0)
-    val selectPage = _selectPageFlow.asStateFlow()
+    private val _showLoading = MutableStateFlow(false)
+    val showLoading: Flow<Boolean> = _showLoading.asStateFlow()
 
-    private val _closeDashBoardFlow = MutableStateFlow(false)
-    val closeDashBoard = _closeDashBoardFlow.asStateFlow()
+    private val _showError = MutableStateFlow(false)
+    val showError: Flow<Boolean> = _showError.asStateFlow()
 
-    private var selectedPagePosition = 0
+    private val _showEmpty = MutableStateFlow(false)
+    val showEmpty: Flow<Boolean> = _showEmpty.asStateFlow()
 
-    fun onNextClicked() {
+    private val _screenPosition = MutableStateFlow(0)
+    val screenPosition: Flow<Int> = _screenPosition.asStateFlow()
+
+    private val _showDashBoards: MutableStateFlow<List<DashBoardScreenEntity>> = MutableStateFlow(listOf())
+    val showDashBoards: Flow<List<DashBoardScreenEntity>> = _showDashBoards.asStateFlow().filter { it.isNotEmpty() }
+
+    val showDashBoardNavigation: Flow<Boolean> = _showDashBoards.map { it.isNotEmpty() }
+
+    private var dashBoardPosition: Int = 0
+
+    init {
+        loadDashBoard()
+        subscribeBoardScreens()
+    }
+
+    private fun loadDashBoard() {
         viewModelScope.launch {
-            if (selectedPagePosition < 2) {
-                incrementPosition()
-                return@launch
-            }
-            _closeDashBoardFlow.emit(true)
+            dashBoardInteractor.loadDashBoardScreens()
         }
     }
 
-    fun onBackClicked() {
-        if (selectedPagePosition > 0) {
-            decrementPosition()
+    private fun subscribeBoardScreens() {
+        viewModelScope.launch {
+            dashBoardInteractor.dashBoardScreens.collect {
+                if (it.status == COMPLETED) _showDashBoards.emit(it.data)
+                _showLoading.emit(it.status == LOADING)
+                _showError.emit(it.status == ERROR)
+                _showEmpty.emit(it.status == EMPTY)
+            }
         }
     }
 
     private fun incrementPosition() {
-        selectedPagePosition += 1
-        _selectPageFlow.value = selectedPagePosition
+        viewModelScope.launch {
+            dashBoardPosition += 1
+            _screenPosition.value = dashBoardPosition
+        }
     }
 
     private fun decrementPosition() {
-        selectedPagePosition -= 1
-        _selectPageFlow.value = selectedPagePosition
+        viewModelScope.launch {
+            dashBoardPosition -= 1
+            _screenPosition.value = dashBoardPosition
+        }
     }
 
-    @AssistedInject.Factory
-    interface Factory : AssistedSavedStateViewModelFactory<DashBoardViewModel> {
-        override fun create(savedStateHandle: SavedStateHandle): DashBoardViewModel
+    fun onButtonNextClicked() {
+        viewModelScope.launch {
+            if (dashBoardPosition < 2) {
+                incrementPosition()
+                return@launch
+            }
+            sendEvent(_event) { CloseDashBoard() }
+        }
     }
+
+    fun onButtonBackClicked() {
+        if (dashBoardPosition > 0) {
+            decrementPosition()
+        }
+    }
+
+    fun onLoadTryAgain() {
+        loadDashBoard()
+    }
+
+    @AssistedFactory
+    interface Factory : AssistedSavedStateViewModelFactory<DashBoardViewModel>
 }

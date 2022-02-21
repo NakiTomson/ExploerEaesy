@@ -6,4 +6,19 @@
         <item name="backgroundTint">@color/orange</item>
     </style>
 
+    <style name="MaterialButton.Default">
+        <item name="android:padding">16dp</item>
+        <item name="cornerRadius">40dp</item>
+        <item name="backgroundTint">@color/orange</item>
+    </style>
+
+    <style name="BottomSheetDialogBlackoutTheme" parent="ThemeOverlay.MaterialComponents.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="bottomSheetStyle">@style/BottomSheetModalStyle</item>
+    </style>
+
+    <style name="BottomSheetModalStyle" parent="@style/Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/background_bottomsheet</item>
+    </style>
+
 </resources>

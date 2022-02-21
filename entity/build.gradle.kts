@@ -1,5 +1,3 @@
-import Libraries.addCommonDependencies
-
 plugins {
     id("com.android.library")
     kotlin("android")
@@ -8,5 +6,5 @@ plugins {
 }
 
 dependencies {
-    addCommonDependencies()
+    implementation(Libraries.kotlin)
 }

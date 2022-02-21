@@ -1,10 +1,7 @@
 package com.testtask.main_impl.di
 
 import androidx.fragment.app.Fragment
-import com.testtask.core_di.ApplicationProvider
+import com.testtask.utils.appComponent
 
 val Fragment.injector: HomeComponent
-    get() {
-        val appProvider = (requireActivity().application as ApplicationProvider).appProvider
-        return HomeComponent.create(appProvider)
-    }
+    get() = HomeComponent.create(requireContext().appComponent)

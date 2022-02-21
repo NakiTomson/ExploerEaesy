@@ -2,15 +2,13 @@ package com.example.user.di
 
 import androidx.lifecycle.ViewModel
 import com.example.user.ui.user.model.UserViewModel
-import com.squareup.inject.assisted.dagger2.AssistedModule
-import com.testtask.feature_core.AssistedSavedStateViewModelFactory
-import com.testtask.feature_core.ViewModelKey
+import com.testtask.utils.AssistedSavedStateViewModelFactory
+import com.testtask.utils.ViewModelKey
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 
-@AssistedModule
-@Module(includes = [AssistedInject_UserViewModelFactoriesModule::class])
+@Module
 interface UserViewModelFactoriesModule {
 
     @Binds

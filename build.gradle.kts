@@ -1,7 +1,6 @@
 
 buildscript {
 
-    val kotlin_version by extra("1.4.10")
     repositories {
         google()
         mavenCentral()
@@ -13,9 +12,9 @@ buildscript {
         classpath(BuildPlugins.androidGradlePlugin)
         classpath(BuildPlugins.kotlinGradlePlugin)
         classpath(BuildPlugins.navigationGradlePlugin)
-        classpath(BuildPlugins.hiltGradlePlugin)
+//        classpath(BuildPlugins.hiltGradlePlugin)
         classpath(BuildPlugins.navigationGradlePlugin)
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10")
     }
 }
 

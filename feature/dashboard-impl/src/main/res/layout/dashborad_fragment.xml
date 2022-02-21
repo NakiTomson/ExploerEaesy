@@ -11,7 +11,7 @@
         android:id="@+id/welcomePager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/tvNext"
+        app:layout_constraintBottom_toTopOf="@+id/buttonNext"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -21,9 +21,10 @@
         android:id="@+id/plvCounter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/tvBack"
-        app:layout_constraintEnd_toStartOf="@+id/tvNext"
-        app:layout_constraintStart_toEndOf="@+id/tvBack"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonBack"
+        app:layout_constraintEnd_toStartOf="@+id/buttonNext"
+        app:layout_constraintStart_toEndOf="@+id/buttonBack"
         app:layout_constraintTop_toBottomOf="@+id/welcomePager"
         app:plv_drop_line_color="@color/gray_6"
         app:plv_drop_line_height="2dp"
@@ -34,12 +35,13 @@
         app:plv_line_space="4dp" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/tvNext"
+        android:id="@+id/buttonNext"
         style="@style/MaterialButton"
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="32dp"
+        android:visibility="gone"
         app:cornerRadius="16dp"
         app:icon="@drawable/ic_navigate_next"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -47,15 +49,27 @@
         tools:visibility="visible" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/tvBack"
+        android:id="@+id/buttonBack"
         style="@style/MaterialButton"
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="32dp"
+        android:visibility="gone"
         app:cornerRadius="16dp"
         app:icon="@drawable/ic_navigate_before"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/dashBoardProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
