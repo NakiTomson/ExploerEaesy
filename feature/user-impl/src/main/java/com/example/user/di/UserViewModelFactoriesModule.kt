@@ -12,8 +12,7 @@ import dagger.multibindings.IntoMap
 interface UserViewModelFactoriesModule {
 
     @Binds
-    @IntoMap
-    @ViewModelKey(UserViewModel::class)
+    @[IntoMap ViewModelKey(UserViewModel::class)]
     fun bindUserViewModelFactory(impl: UserViewModel.Factory): AssistedSavedStateViewModelFactory<out ViewModel>
 
 }

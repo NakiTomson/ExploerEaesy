@@ -14,12 +14,10 @@ interface DashBoardViewModelFactoriesModule {
 
 
     @Binds
-    @IntoMap
-    @ViewModelKey(DashBoardViewModel::class)
+    @[IntoMap ViewModelKey(DashBoardViewModel::class)]
     fun bindDashBordViewModelFactory(impl: DashBoardViewModel.Factory): AssistedSavedStateViewModelFactory<out ViewModel>
 
     @Binds
-    @IntoMap
-    @ViewModelKey(DashBoardPageViewModel::class)
+    @[IntoMap ViewModelKey(DashBoardPageViewModel::class)]
     fun bindDashBordPageViewModelFactory(impl: DashBoardPageViewModel.Factory): AssistedSavedStateViewModelFactory<out ViewModel>
 }

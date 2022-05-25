@@ -14,12 +14,10 @@ interface BaseFeatureViewModelFactoriesModule {
 
 
     @Binds
-    @IntoMap
-    @ViewModelKey(ErrorDialogViewModel::class)
+    @[IntoMap ViewModelKey(ErrorDialogViewModel::class)]
     fun bindErrorViewModelFactory(impl: ErrorDialogViewModel.Factory): AssistedSavedStateViewModelFactory<out ViewModel>
 
     @Binds
-    @IntoMap
-    @ViewModelKey(EmptyDialogViewModel::class)
+    @[IntoMap ViewModelKey(EmptyDialogViewModel::class)]
     fun bindEmptyViewModelFactory(impl: EmptyDialogViewModel.Factory): AssistedSavedStateViewModelFactory<out ViewModel>
 }

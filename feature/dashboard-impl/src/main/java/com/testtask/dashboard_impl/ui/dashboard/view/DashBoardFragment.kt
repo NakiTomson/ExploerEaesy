@@ -61,12 +61,12 @@ class DashBoardFragment : BaseFragment<DashBoardViewModel>(R.layout.dashborad_fr
 
     private fun handlerUiState() {
         subscribeState(Lifecycle.State.CREATED) {
-            showLoading.onEach { showLoading(it) }.launchIn(lifecycleScope)
-            showError.onEach { showErrorScreen(it) }.launchIn(lifecycleScope)
-            showEmpty.onEach { showEmptyScreen(it) }.launchIn(lifecycleScope)
-            showDashBoards.onEach { setupPagerViews(it) }.launchIn(lifecycleScope)
-            showDashBoardNavigation.onEach { showBashBoardNavigation(it) }.launchIn(lifecycleScope)
-            screenPosition.onEach { setScreenPosition(it) }.launchIn(lifecycleScope)
+            showLoading.onEach { showLoading(it) }.launchIn(viewLifecycleOwner.lifecycleScope)
+            showError.onEach { showErrorScreen(it) }.launchIn(viewLifecycleOwner.lifecycleScope)
+            showEmpty.onEach { showEmptyScreen(it) }.launchIn(viewLifecycleOwner.lifecycleScope)
+            showDashBoards.onEach { setupPagerViews(it) }.launchIn(viewLifecycleOwner.lifecycleScope)
+            showDashBoardNavigation.onEach { showBashBoardNavigation(it) }.launchIn(viewLifecycleOwner.lifecycleScope)
+            screenPosition.onEach { setScreenPosition(it) }.launchIn(viewLifecycleOwner.lifecycleScope)
         }
     }
 

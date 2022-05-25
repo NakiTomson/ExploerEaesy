@@ -14,8 +14,7 @@ interface SplashViewModelFactoriesModule {
 
 
     @Binds
-    @IntoMap
-    @ViewModelKey(SplashViewModel::class)
+    @[IntoMap ViewModelKey(SplashViewModel::class)]
     fun bindSplashViewModelFactory(impl: SplashViewModel.Factory): AssistedSavedStateViewModelFactory<out ViewModel>
 
 }
