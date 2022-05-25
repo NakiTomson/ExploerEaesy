@@ -81,7 +81,7 @@ object Libraries {
         const val stateMachine = "0.2.0"
         const val palette = "1.0.0"
         const val blurry = "4.0.0"
-        const val room = "2.2.6"
+        const val room = "2.4.2"
     }
 
     //Kotlin

@@ -1,32 +1,17 @@
-
 buildscript {
-
-    repositories {
-        google()
-        mavenCentral()
-        maven { url = uri("https://plugins.gradle.org/m2/") }
-        jcenter()
-    }
-
     dependencies {
         classpath(BuildPlugins.androidGradlePlugin)
         classpath(BuildPlugins.kotlinGradlePlugin)
         classpath(BuildPlugins.navigationGradlePlugin)
-//        classpath(BuildPlugins.hiltGradlePlugin)
         classpath(BuildPlugins.navigationGradlePlugin)
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10")
     }
 }
 
 
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-        jcenter()
-        maven { setUrl("https://jitpack.io") }
-    }
+plugins {
+    kotlin("android") version kotlinVersion apply false
 }
+
 
 subprojects {
 

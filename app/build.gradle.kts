@@ -8,7 +8,6 @@ plugins {
     kotlin("kapt")
     kotlin("android.extensions")
     id("androidx.navigation.safeargs.kotlin")
-//    id("dagger.hilt.android.plugin")
 }
 
 
@@ -19,6 +18,16 @@ android {
         applicationId = AndroidSdk.applicationId
         versionCode = AndroidSdk.verstionCode
         versionName = AndroidSdk.versionName
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += mapOf(
+                    "room.schemaLocation" to "$projectDir/schemas",
+                    "room.incremental" to "true",
+                    "room.expandProjection" to "true"
+                )
+            }
+        }
     }
 
     applicationVariants.all {
