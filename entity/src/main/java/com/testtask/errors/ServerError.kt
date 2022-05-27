@@ -1,4 +1,4 @@
-package com.testtask.entity
+package com.testtask.errors
 
 open class ServerError : Throwable() {
     class UndefinedError : ServerError()

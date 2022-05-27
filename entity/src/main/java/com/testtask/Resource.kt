@@ -1,4 +1,6 @@
-package com.testtask.entity
+package com.testtask
+
+import com.testtask.errors.ServerError
 
 
 data class Resource<T>(

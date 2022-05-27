@@ -1,7 +1,7 @@
 package com.testtask.persistence.dao
 
 import androidx.room.*
-import com.testtask.persistence.dto.AnonymousUserDb
+import com.testtask.persistence.anonymous_user.dto.AnonymousUserDb
 
 @Dao
 interface AnonymousUserDao {
@@ -10,12 +10,12 @@ interface AnonymousUserDao {
     fun getAll(): List<AnonymousUserDb>?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(anonymousUser: AnonymousUserDb)
+    fun insert(anonymousUser: AnonymousUserDb): Boolean
 
     @Update
-    fun update(anonymousUser: AnonymousUserDb)
+    fun update(anonymousUser: AnonymousUserDb): Boolean
 
     @Delete
-    fun delete(anonymousUser: AnonymousUserDb)
+    fun delete(anonymousUser: AnonymousUserDb): Boolean
 
 }

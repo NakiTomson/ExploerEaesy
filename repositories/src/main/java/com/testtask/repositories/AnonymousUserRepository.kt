@@ -1,11 +1,10 @@
 package com.testtask.repositories
 
-import com.testtask.persistence.dto.AnonymousUserDb
+import com.testtask.entity.AnonymousUserEntity
 
 interface AnonymousUserRepository {
 
-    fun addAnonymousUser(anonymousUserDb: AnonymousUserDb)
+    suspend fun createAnonymousUser()
 
-    fun removeAnonymousUser(anonymousUserDb: AnonymousUserDb)
-
+    suspend fun updateAnonymousUser(anonymousUserEntity: AnonymousUserEntity)
 }

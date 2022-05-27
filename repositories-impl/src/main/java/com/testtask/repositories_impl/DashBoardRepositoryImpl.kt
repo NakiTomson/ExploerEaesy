@@ -1,10 +1,10 @@
 package com.testtask.repositories_impl
 
 
+import com.testtask.Resource
+import com.testtask.Resource.Status
 import com.testtask.entity.DashBoardScreenEntity
-import com.testtask.entity.Resource
-import com.testtask.entity.Resource.Status
-import com.testtask.entity.ServerError
+import com.testtask.errors.ServerError
 import com.testtask.network.service.DashBoardService
 import com.testtask.network.сonverters.NetworkResult
 import com.testtask.repositories.DashBoardRepository

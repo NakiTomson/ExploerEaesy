@@ -11,6 +11,5 @@ dependencies {
     addCommonDependencies()
     api(project(":core-ui"))
     api(project(":core-di"))
-    api(project(":repositories"))
     api(project(":interactors"))
 }
