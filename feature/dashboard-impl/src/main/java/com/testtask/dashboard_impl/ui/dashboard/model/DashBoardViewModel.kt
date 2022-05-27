@@ -8,7 +8,7 @@ import com.testtask.core_ui.utils.SingleLiveEventFlow
 import com.testtask.dashboard_impl.ui.dashboard.event.DashBoardEvent
 import com.testtask.dashboard_impl.ui.dashboard.event.DashBoardEvent.CloseDashBoard
 import com.testtask.entity.DashBoardScreenEntity
-import com.testtask.entity.Resource.Status.*
+import com.testtask.Resource.Status.*
 import com.testtask.interactors.DashBoardInteractor
 import com.testtask.utils.AssistedSavedStateViewModelFactory
 import dagger.assisted.Assisted

@@ -23,12 +23,12 @@ class EasyApp : Application(), ApplicationProvider {
     private fun setupDI() {
         val contextComponent = ContextComponent.create(this)
         val configurationComponent = ConfigurationComponent.create(contextComponent)
-   
-        val persistenceComponent = PersistenceComponent.create(contextComponent, configurationComponent)
+
         val networkComponent = NetworkComponent.create(
             contextComponent,
             configurationComponent
         )
+        val persistenceComponent = PersistenceComponent.create(contextComponent, configurationComponent, networkComponent)
         val repositoriesComponent = RepositoriesComponent.create(
             networkComponent,
             contextComponent,
@@ -41,7 +41,8 @@ class EasyApp : Application(), ApplicationProvider {
             contextComponent,
             networkComponent,
             repositoriesComponent,
-            interactorsComponent
+            interactorsComponent,
+            persistenceComponent
         )
     }
 }

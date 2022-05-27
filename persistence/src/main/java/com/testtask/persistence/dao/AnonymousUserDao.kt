@@ -1,7 +1,7 @@
 package com.testtask.persistence.dao
 
 import androidx.room.*
-import com.testtask.persistence.dto.AnonymousUserDb
+import com.testtask.persistence.anonymous_user.dto.AnonymousUserDb
 
 @Dao
 interface AnonymousUserDao {

@@ -2,7 +2,7 @@ package com.testtask.repositories
 
 
 import com.testtask.entity.DashBoardScreenEntity
-import com.testtask.entity.Resource
+import com.testtask.Resource
 import kotlinx.coroutines.flow.Flow
 
 interface DashBoardRepository {

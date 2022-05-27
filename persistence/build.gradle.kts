@@ -11,4 +11,5 @@ dependencies {
     addRoom()
     addCommonDependencies()
     api(project(":entity"))
+    implementation(project(":network"))
 }

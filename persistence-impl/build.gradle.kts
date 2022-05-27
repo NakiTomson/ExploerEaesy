@@ -12,4 +12,5 @@ dependencies {
     addRoom()
     api(project(":persistence"))
     implementation(project(":core-di"))
+    implementation(project(":network"))
 }

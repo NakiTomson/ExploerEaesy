@@ -50,7 +50,7 @@ android {
         productFlavors {
             create("dev") {
                 dimension = "default"
-                buildConfigField("String", "BASE_URL", "\"https://61881fc2057b9b00177f9bc2.mockapi.io\"")
+                buildConfigField("String", "BASE_URL", "\"https://6290f028665ea71fe13e3ccc.mockapi.io\"")
                 buildConfigField("String", "DATA_BASE_NAME", "\"explodereas.db\"")
             }
         }

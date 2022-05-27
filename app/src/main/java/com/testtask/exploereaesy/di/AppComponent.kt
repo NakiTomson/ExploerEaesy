@@ -14,6 +14,7 @@ import javax.inject.Singleton
         RepositoryProvider::class,
         InteractorsProvider::class,
         NetworkProvider::class,
+        PersistenceProvider::class,
     ],
     modules = [
         FeatureApisModule::class
@@ -30,12 +31,14 @@ interface AppComponent : AppProvider {
             networkProvider: NetworkProvider,
             repositoryProvider: RepositoryProvider,
             interactorsProvider: InteractorsProvider,
+            persistenceProvider: PersistenceProvider,
         ): AppComponent {
             return DaggerAppComponent.builder()
                 .contextProvider(contextProvider)
                 .networkProvider(networkProvider)
                 .repositoryProvider(repositoryProvider)
                 .interactorsProvider(interactorsProvider)
+                .persistenceProvider(persistenceProvider)
                 .build()
         }
     }
