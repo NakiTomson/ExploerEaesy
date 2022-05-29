@@ -7,5 +7,5 @@ import retrofit2.http.GET
 interface TokenService {
 
     @GET("api/v1/anonymousUser")
-    suspend fun getAnonymousUser(): NetworkResult<AnonymousUserResponse>
+    suspend fun getAnonymousUser(): NetworkResult<List<AnonymousUserResponse>>
 }
