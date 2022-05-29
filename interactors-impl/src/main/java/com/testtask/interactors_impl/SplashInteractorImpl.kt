@@ -13,6 +13,7 @@ class SplashInteractorImpl @Inject constructor(
 
 
     override suspend fun createAnonymousSession() = withContext(dispatchers.io) {
-        tokenRepository.createAnonymousUser()
+        val invalidToken = System.currentTimeMillis() > (tokenRepository.getAnonymousUserOrNull()?.accessTime ?: 0)
+        if (invalidToken) tokenRepository.createAnonymousUser()
     }
 }

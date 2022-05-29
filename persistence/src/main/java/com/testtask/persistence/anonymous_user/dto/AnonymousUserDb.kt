@@ -9,7 +9,8 @@ data class AnonymousUserDb(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val isOnBoarded: Boolean?,
-    val anonymousToken: String?
+    val anonymousToken: String?,
+    val accessTime: Long?
 ) {
     companion object {
         internal const val TABLE_NAME = "anonymous_user"

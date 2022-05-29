@@ -14,17 +14,16 @@ class RetrofitTokenDataSource @Inject constructor(
 ) : TokenRemoteDataSource {
 
     override suspend fun loadUser(): Resource<AnonymousUserResponse> {
-        return when (val result =  tokenService.getAnonymousUser()) {
+        return when (val result = tokenService.getAnonymousUser()) {
             is NetworkResult.Response.Success -> {
                 val response = result.data ?: throw  ServerError.UndefinedError()
                 response.first().toResource()
             }
             is NetworkResult.Response.Error -> {
-                Resource(Resource.Status.ERROR, AnonymousUserResponse(null), ServerError.UndefinedError())
+                Resource(Resource.Status.ERROR, AnonymousUserResponse(null, null), ServerError.UndefinedError())
             }
             is NetworkResult.Exception -> {
                 throw result.exception
-                Resource(Resource.Status.ERROR, AnonymousUserResponse(null), ServerError.UndefinedError())
             }
         }
     }

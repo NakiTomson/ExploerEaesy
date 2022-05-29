@@ -7,5 +7,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class AnonymousUserResponse(
     @SerializedName("anonymous_token")
-    val anonymousToken: String?
+    val anonymousToken: String?,
+    @SerializedName("access_time")
+    val accessTime: Int?
 ) : Parcelable

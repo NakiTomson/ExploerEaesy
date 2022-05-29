@@ -6,20 +6,28 @@ import com.testtask.network.response.AnonymousUserResponse
 import com.testtask.persistence.anonymous_user.dto.AnonymousUserDb
 
 
-fun AnonymousUserResponse.toUserBb(): AnonymousUserDb {
-    return AnonymousUserDb(isOnBoarded = false, anonymousToken = anonymousToken)
+fun AnonymousUserResponse.toUserBb(currentTimeMillis: Long): AnonymousUserDb {
+    return AnonymousUserDb(
+        isOnBoarded = false,
+        anonymousToken = anonymousToken,
+        accessTime = accessTime?.toLong()?.plus(currentTimeMillis)
+    )
 }
 
-fun AnonymousUserEntity.toUserBb(): AnonymousUserDb {
-    return AnonymousUserDb(isOnBoarded = isOnBoarded, anonymousToken = anonymousToken)
+fun AnonymousUserEntity.toUserBb(currentTimeMillis: Long): AnonymousUserDb {
+    return AnonymousUserDb(
+        isOnBoarded = isOnBoarded,
+        anonymousToken = anonymousToken,
+        accessTime = accessTime?.plus(currentTimeMillis)
+    )
 }
 
 fun AnonymousUserResponse.toUserEntity(isOnBoarded: Boolean): AnonymousUserEntity {
-    return AnonymousUserEntity(isOnBoarded = isOnBoarded, anonymousToken = anonymousToken)
+    return AnonymousUserEntity(isOnBoarded = isOnBoarded, anonymousToken = anonymousToken, accessTime = accessTime?.toLong())
 }
 
 fun AnonymousUserDb.toUserEntity(): AnonymousUserEntity {
-    return AnonymousUserEntity(isOnBoarded = isOnBoarded, anonymousToken = anonymousToken)
+    return AnonymousUserEntity(isOnBoarded = isOnBoarded, anonymousToken = anonymousToken, accessTime = accessTime)
 }
 
 fun AnonymousUserResponse.toResource(): Resource<AnonymousUserResponse> {

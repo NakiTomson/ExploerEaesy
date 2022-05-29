@@ -7,4 +7,6 @@ interface TokenRepository {
     suspend fun createAnonymousUser()
 
     suspend fun updateAnonymousUser(anonymousUserEntity: AnonymousUserEntity)
+
+    suspend fun getAnonymousUserOrNull(): AnonymousUserEntity?
 }

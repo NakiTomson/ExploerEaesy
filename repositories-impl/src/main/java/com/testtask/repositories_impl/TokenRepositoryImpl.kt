@@ -14,12 +14,19 @@ class TokenRepositoryImpl @Inject constructor(
 ) : TokenRepository {
 
     override suspend fun createAnonymousUser() {
-        val user = remoteSource.loadUser()
-        user.data.anonymousToken ?: return
-        localSource.createUser(user.data.toUserEntity(localSource.getUser()?.isOnBoarded == true).toUserBb())
+        val resource = remoteSource.loadUser()
+        resource.data.anonymousToken ?: return
+        val user = resource.data
+            .toUserEntity(localSource.getUser()?.isOnBoarded == true)
+            .toUserBb(System.currentTimeMillis())
+        localSource.createUser(user)
     }
 
     override suspend fun updateAnonymousUser(anonymousUserEntity: AnonymousUserEntity) {
-        localSource.updateUser(anonymousUserEntity.toUserBb())
+        localSource.updateUser(anonymousUserEntity.toUserBb(System.currentTimeMillis()))
+    }
+
+    override suspend fun getAnonymousUserOrNull(): AnonymousUserEntity? {
+        return localSource.getUser()?.toUserEntity()
     }
 }

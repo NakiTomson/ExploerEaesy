@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.testtask.persistence.dao.AnonymousUserDao
 import com.testtask.persistence_impl.db.ExploderEasyDataBase
+import com.testtask.persistence_impl.db.MIGRATION_1_2
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -18,7 +19,9 @@ interface RoomModule {
         @Singleton
         @JvmStatic
         fun provideDataBase(context: Context): ExploderEasyDataBase {
-            return Room.databaseBuilder(context, ExploderEasyDataBase::class.java, "explodereas.db").build()
+            return Room.databaseBuilder(context, ExploderEasyDataBase::class.java, "explodereas.db")
+                .addMigrations(MIGRATION_1_2)
+                .build()
         }
 
         @Provides
