@@ -1,4 +1,4 @@
-package com.testtask.repositories_impl
+package com.testtask.repositories_impl.token
 
 import com.testtask.entity.AnonymousUserEntity
 import com.testtask.persistence.anonymous_user.TokenLocalDataSource

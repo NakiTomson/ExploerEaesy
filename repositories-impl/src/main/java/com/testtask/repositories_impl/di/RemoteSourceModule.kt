@@ -1,6 +1,8 @@
 package com.testtask.repositories_impl.di
 
-import com.testtask.repositories_impl.source.RetrofitTokenDataSource
+import com.testtask.repositories_impl.dashboard.source.DashBoardRetrofitDataSource
+import com.testtask.repositories_impl.token.source.TokenRetrofitDataSource
+import com.testtask.source.DashBoardRemoteDataSource
 import com.testtask.source.TokenRemoteDataSource
 import dagger.Binds
 import dagger.Module
@@ -10,5 +12,8 @@ interface RemoteSourceModule {
 
 
     @Binds
-    fun bindTokenRemoteDataSource(impl: RetrofitTokenDataSource): TokenRemoteDataSource
+    fun bindTokenRemoteDataSource(impl: TokenRetrofitDataSource): TokenRemoteDataSource
+
+    @Binds
+    fun bindDashBoardRemoteDataSource(impl: DashBoardRetrofitDataSource): DashBoardRemoteDataSource
 }

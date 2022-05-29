@@ -44,13 +44,13 @@ class DashBoardViewModel @AssistedInject constructor(
     private var dashBoardPosition: Int = 0
 
     init {
-        loadDashBoard()
+        getDashBoard()
         subscribeBoardScreens()
     }
 
-    private fun loadDashBoard() {
+    private fun getDashBoard() {
         viewModelScope.launch {
-            dashBoardInteractor.loadDashBoardScreens()
+            dashBoardInteractor.getDashBoardScreens()
         }
     }
 
@@ -96,7 +96,7 @@ class DashBoardViewModel @AssistedInject constructor(
     }
 
     fun onLoadTryAgain() {
-        loadDashBoard()
+        getDashBoard()
     }
 
     @AssistedFactory

@@ -1,9 +1,9 @@
 package com.testtask.interactors_impl.di
 
 import com.testtask.interactors.DashBoardInteractor
-import com.testtask.interactors.SplashInteractor
+import com.testtask.interactors.TokenInteractor
 import com.testtask.interactors_impl.DashBoardInteractorImpl
-import com.testtask.interactors_impl.SplashInteractorImpl
+import com.testtask.interactors_impl.TokenInteractorImpl
 import dagger.Binds
 import dagger.Module
 
@@ -11,7 +11,7 @@ import dagger.Module
 interface InteractorsModule {
 
     @Binds
-    fun bindSplashInteractor(impl: SplashInteractorImpl): SplashInteractor
+    fun bindSplashInteractor(impl: TokenInteractorImpl): TokenInteractor
 
     @Binds
     fun bindDashBoardInteractor(impl: DashBoardInteractorImpl): DashBoardInteractor

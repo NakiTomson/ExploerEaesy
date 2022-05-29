@@ -13,7 +13,7 @@ class DashBoardInteractorImpl @Inject constructor(
 
     override val dashBoardScreens = dashBoardRepository.dashBoardScreens
 
-    override suspend fun loadDashBoardScreens() = withContext(dispatchers.io) {
-        dashBoardRepository.loadDashBoardScreens()
+    override suspend fun getDashBoardScreens() = withContext(dispatchers.io) {
+        dashBoardRepository.getDashBoardScreens()
     }
 }

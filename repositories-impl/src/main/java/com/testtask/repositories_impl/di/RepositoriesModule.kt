@@ -2,10 +2,8 @@ package com.testtask.repositories_impl.di
 
 import com.testtask.repositories.DashBoardRepository
 import com.testtask.repositories.TokenRepository
-import com.testtask.repositories_impl.DashBoardRepositoryImpl
-import com.testtask.repositories_impl.TokenRepositoryImpl
-import com.testtask.repositories_impl.source.RetrofitTokenDataSource
-import com.testtask.source.TokenRemoteDataSource
+import com.testtask.repositories_impl.dashboard.DashBoardRepositoryImpl
+import com.testtask.repositories_impl.token.TokenRepositoryImpl
 import dagger.Binds
 import dagger.Module
 

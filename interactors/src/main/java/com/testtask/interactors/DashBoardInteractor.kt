@@ -9,5 +9,5 @@ interface DashBoardInteractor {
 
     val dashBoardScreens: Flow<Resource<List<DashBoardScreenEntity>>>
 
-    suspend fun loadDashBoardScreens()
+    suspend fun getDashBoardScreens()
 }

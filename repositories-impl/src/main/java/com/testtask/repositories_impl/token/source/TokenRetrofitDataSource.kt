@@ -1,4 +1,4 @@
-package com.testtask.repositories_impl.source
+package com.testtask.repositories_impl.token.source
 
 import com.testtask.Resource
 import com.testtask.errors.ServerError
@@ -9,7 +9,7 @@ import com.testtask.persistence.anonymous_user.mapper.toResource
 import com.testtask.source.TokenRemoteDataSource
 import javax.inject.Inject
 
-class RetrofitTokenDataSource @Inject constructor(
+class TokenRetrofitDataSource @Inject constructor(
     private val tokenService: TokenService
 ) : TokenRemoteDataSource {
 

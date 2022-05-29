@@ -1,15 +1,15 @@
 package com.testtask.interactors_impl
 
 import com.testtask.core_di.dispatchers.Dispatchers
-import com.testtask.interactors.SplashInteractor
+import com.testtask.interactors.TokenInteractor
 import com.testtask.repositories.TokenRepository
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class SplashInteractorImpl @Inject constructor(
+class TokenInteractorImpl @Inject constructor(
     private val tokenRepository: TokenRepository,
     private val dispatchers: Dispatchers,
-) : SplashInteractor {
+) : TokenInteractor {
 
 
     override suspend fun createAnonymousSession() = withContext(dispatchers.io) {

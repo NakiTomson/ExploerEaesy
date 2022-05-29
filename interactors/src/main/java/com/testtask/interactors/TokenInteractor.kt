@@ -1,7 +1,7 @@
 package com.testtask.interactors
 
 
-interface SplashInteractor {
+interface TokenInteractor {
 
 
     suspend fun createAnonymousSession()
