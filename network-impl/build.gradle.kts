@@ -12,4 +12,5 @@ dependencies {
     api(project(":network"))
     implementation(project(":core-di"))
     debugApi(Libraries.chucker)
+    implementation(project(":persistence"))
 }

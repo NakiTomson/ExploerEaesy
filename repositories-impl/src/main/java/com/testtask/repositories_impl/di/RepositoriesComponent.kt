@@ -8,7 +8,7 @@ import dagger.Component
 
 @Component(
     dependencies = [NetworkProvider::class, ContextProvider::class, PersistenceProvider::class],
-    modules = [RepositoriesModule::class]
+    modules = [RepositoriesModule::class, RemoteSourceModule::class]
 )
 interface RepositoriesComponent : RepositoryProvider {
 

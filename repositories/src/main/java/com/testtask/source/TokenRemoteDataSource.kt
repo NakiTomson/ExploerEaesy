@@ -1,8 +1,7 @@
-package com.testtask.persistence.anonymous_user
+package com.testtask.source
 
 import com.testtask.Resource
 import com.testtask.network.response.AnonymousUserResponse
-import kotlinx.coroutines.flow.Flow
 
 interface TokenRemoteDataSource {
 

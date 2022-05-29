@@ -9,8 +9,8 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(
-    dependencies = [ContextProvider::class, ConfigurationProvider::class, NetworkProvider::class],
-    modules = [RoomModule::class, DataSourceModule::class]
+    dependencies = [ContextProvider::class, ConfigurationProvider::class],
+    modules = [RoomModule::class, LocalDataSourceModule::class]
 )
 interface PersistenceComponent : PersistenceProvider {
 
@@ -18,13 +18,11 @@ interface PersistenceComponent : PersistenceProvider {
 
         fun create(
             contextProvider: ContextProvider,
-            configurationProvider: ConfigurationProvider,
-            networkProvider: NetworkProvider
+            configurationProvider: ConfigurationProvider
         ): PersistenceComponent {
             return DaggerPersistenceComponent.builder()
                 .contextProvider(contextProvider)
                 .configurationProvider(configurationProvider)
-                .networkProvider(networkProvider)
                 .build()
         }
     }

@@ -1,17 +1,17 @@
-package com.testtask.persistence_impl.anonymous_user.remote
+package com.testtask.repositories_impl.source
 
 import com.testtask.Resource
 import com.testtask.errors.ServerError
 import com.testtask.network.response.AnonymousUserResponse
 import com.testtask.network.service.TokenService
 import com.testtask.network.сonverters.NetworkResult
-import com.testtask.persistence.anonymous_user.AnonymousUserRemoteDataSource
 import com.testtask.persistence.anonymous_user.mapper.toResource
+import com.testtask.source.TokenRemoteDataSource
 import javax.inject.Inject
 
-class RetrofitAnonymousUserDataSource @Inject constructor(
+class RetrofitTokenDataSource @Inject constructor(
     private val tokenService: TokenService
-) : AnonymousUserRemoteDataSource {
+) : TokenRemoteDataSource {
 
     override suspend fun loadUser(): Resource<AnonymousUserResponse> {
         return when (val result = tokenService.getAnonymousUser()) {
