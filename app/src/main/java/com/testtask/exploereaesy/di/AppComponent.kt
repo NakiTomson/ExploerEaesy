@@ -1,9 +1,8 @@
 package com.testtask.exploereaesy.di
 
-import android.app.Application
 import com.testtask.core_di.*
+import com.testtask.core_di.dispatchers.DispatchersProvider
 import com.testtask.exploereaesy.view.MainActivity
-import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
 
@@ -15,6 +14,7 @@ import javax.inject.Singleton
         InteractorsProvider::class,
         NetworkProvider::class,
         PersistenceProvider::class,
+        DispatchersProvider::class,
     ],
     modules = [
         FeatureApisModule::class
@@ -32,6 +32,7 @@ interface AppComponent : AppProvider {
             repositoryProvider: RepositoryProvider,
             interactorsProvider: InteractorsProvider,
             persistenceProvider: PersistenceProvider,
+            dispatchersProvider: DispatchersProvider,
         ): AppComponent {
             return DaggerAppComponent.builder()
                 .contextProvider(contextProvider)
@@ -39,6 +40,7 @@ interface AppComponent : AppProvider {
                 .repositoryProvider(repositoryProvider)
                 .interactorsProvider(interactorsProvider)
                 .persistenceProvider(persistenceProvider)
+                .dispatchersProvider(dispatchersProvider)
                 .build()
         }
     }

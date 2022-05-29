@@ -6,6 +6,7 @@ import com.testtask.core_di.ApplicationProvider
 import com.testtask.exploereaesy.di.AppComponent
 import com.testtask.exploereaesy.di.ConfigurationComponent
 import com.testtask.exploereaesy.di.ContextComponent
+import com.testtask.exploereaesy.di.DispatchersComponent
 import com.testtask.interactors_impl.di.InteractorsComponent
 import com.testtask.network_impl.di.NetworkComponent
 import com.testtask.persistence_impl.di.PersistenceComponent
@@ -22,6 +23,8 @@ class EasyApp : Application(), ApplicationProvider {
 
     private fun setupDI() {
         val contextComponent = ContextComponent.create(this)
+        val dispatchersComponent = DispatchersComponent.create()
+
         val configurationComponent = ConfigurationComponent.create(contextComponent)
         val persistenceComponent = PersistenceComponent.create(contextComponent, configurationComponent)
 
@@ -37,13 +40,15 @@ class EasyApp : Application(), ApplicationProvider {
         )
         val interactorsComponent = InteractorsComponent.create(
             repositoriesComponent,
+            dispatchersComponent
         )
         appProvider = AppComponent.create(
             contextComponent,
             networkComponent,
             repositoriesComponent,
             interactorsComponent,
-            persistenceComponent
+            persistenceComponent,
+            dispatchersComponent
         )
     }
 }
