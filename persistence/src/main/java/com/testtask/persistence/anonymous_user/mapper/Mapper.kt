@@ -6,19 +6,19 @@ import com.testtask.network.response.AnonymousUserResponse
 import com.testtask.persistence.anonymous_user.dto.AnonymousUserDb
 
 
-fun AnonymousUserResponse.toUserBb(currentTimeMillis: Long): AnonymousUserDb {
-    return AnonymousUserDb(
-        isOnBoarded = false,
-        anonymousToken = anonymousToken,
-        accessTime = accessTime?.toLong()?.plus(currentTimeMillis)
-    )
-}
+//fun AnonymousUserResponse.toUserBb(currentTimeMillis: Long): AnonymousUserDb {
+//    return AnonymousUserDb(
+//        isOnBoarded = false,
+//        anonymousToken = anonymousToken,
+//        accessTime = accessTime?.toLong()?.plus(currentTimeMillis)
+//    )
+//}
 
 fun AnonymousUserEntity.toUserBb(currentTimeMillis: Long): AnonymousUserDb {
     return AnonymousUserDb(
         isOnBoarded = isOnBoarded,
-        anonymousToken = anonymousToken,
-        accessTime = accessTime?.plus(currentTimeMillis)
+        anonymousToken = anonymousToken!!,
+        accessTime = accessTime?.plus(currentTimeMillis)!!
     )
 }
 

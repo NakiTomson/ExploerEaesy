@@ -5,7 +5,7 @@ import com.testtask.persistence.anonymous_user.dto.AnonymousUserDb
 import com.testtask.persistence.dao.AnonymousUserDao
 import javax.inject.Inject
 
-class RoomTokenDataSource @Inject constructor(
+class TokenRoomDataSource @Inject constructor(
     private val userDao: AnonymousUserDao,
 ) : TokenLocalDataSource {
 

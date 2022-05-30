@@ -9,7 +9,7 @@ import com.testtask.persistence.dash_board.dto.DashBoardScreenDb
 
 @Database(
     version = 2,
-    exportSchema = false,
+    exportSchema = true,
     entities = [AnonymousUserDb::class, DashBoardScreenDb::class],
 //    autoMigrations = [
 //        AutoMigration(from = 1, to = 2)

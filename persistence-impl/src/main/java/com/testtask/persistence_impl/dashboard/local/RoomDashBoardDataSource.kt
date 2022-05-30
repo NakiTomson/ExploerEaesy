@@ -15,7 +15,7 @@ class RoomDashBoardDataSource @Inject constructor(
     }
 
     override fun createDashBoard(screen: List<DashBoardScreenDb>) {
-       screen.forEach { createDashBoard(it) }
+        dashBoardDao.saveAll(screen)
     }
 
     override fun getDashBoards(): Resource<List<DashBoardScreenDb>> {

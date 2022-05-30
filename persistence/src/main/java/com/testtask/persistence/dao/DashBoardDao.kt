@@ -15,4 +15,8 @@ interface DashBoardDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(anonymousUser: DashBoardScreenDb)
 
+    @Insert
+    @JvmSuppressWildcards
+    fun saveAll(anonymousUser: List<DashBoardScreenDb>)
+
 }
