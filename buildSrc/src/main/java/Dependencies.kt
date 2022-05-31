@@ -40,7 +40,7 @@ object Libraries {
         const val dagger = "2.40"
         const val daggerCompiler = "2.40"
         const val hilt = "2.40"
-        const val coroutines = "1.4.3"
+        const val coroutines = "1.6.2"
         const val appCompat = "1.3.0"
         const val fragment = "1.3.4"
         const val navigation = "2.4.0-alpha10"
@@ -145,8 +145,8 @@ object Libraries {
 
     //Room
     const val room = "androidx.room:room-runtime:${Versions.room}"
-    const val roomCompiler = "androidx.room:room-compiler:${Versions.room}"
     const val roomKtx = "androidx.room:room-ktx:${Versions.room}"
+    const val roomCompiler = "androidx.room:room-compiler:${Versions.room}"
 
     //NetWork
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"

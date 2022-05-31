@@ -23,5 +23,4 @@ class MainActivity : AppCompatActivity() {
         val appComponent = (application as EasyApp).appProvider as AppComponent
         appComponent.inject(this)
     }
-
 }

@@ -10,6 +10,7 @@ buildscript {
 
 plugins {
     kotlin("android") version kotlinVersion apply false
+//    kotlin("kapt") version kotlinVersion apply false
 }
 
 

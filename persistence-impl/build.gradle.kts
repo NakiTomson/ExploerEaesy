@@ -7,6 +7,18 @@ plugins {
     kotlin("kapt")
 }
 
+android {
+    defaultConfig {
+        kapt {
+            arguments {
+                arg("room.schemaLocation", "$projectDir/schemas")
+            }
+        }
+    }
+    sourceSets {
+        getByName("androidTest").assets.srcDir("$projectDir/schemas")
+    }
+}
 dependencies {
     addCommonDependencies()
     addRoom()
