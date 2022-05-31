@@ -18,19 +18,7 @@ android {
         applicationId = AndroidSdk.applicationId
         versionCode = AndroidSdk.verstionCode
         versionName = AndroidSdk.versionName
-
-        kapt {
-            arguments {
-                arg("room.schemaLocation", "$projectDir/schemas".toString())
-            }
-        }
     }
-
-    sourceSets {
-        // Adds exported schema location as test app assets.
-        getByName("androidTest").assets.srcDir("$projectDir/schemas")
-    }
-
 
     applicationVariants.all {
         outputs.forEach { output ->
