@@ -1,6 +1,7 @@
 package com.testtask.network_impl.di
 
 import com.testtask.persistence.anonymous_user.TokenLocalDataSource
+import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
 import okhttp3.Interceptor.Chain
 import okhttp3.Response
@@ -14,7 +15,9 @@ class AppInterceptor @Inject constructor(
         val request = chain.request()
         val builder = request.newBuilder()
         val urlBuilder = request.url.newBuilder()
-        val anonymousToken = tokenLocal.getUser()?.anonymousToken
+        val anonymousToken = runBlocking {
+            tokenLocal.getUser()?.anonymousToken
+        }
         builder.apply {
             addHeader(HEADER_AUTHORIZATION, "Bearer $anonymousToken")
             url(urlBuilder.build())

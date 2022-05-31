@@ -146,8 +146,7 @@ object Libraries {
     //Room
     const val room = "androidx.room:room-runtime:${Versions.room}"
     const val roomCompiler = "androidx.room:room-compiler:${Versions.room}"
-    const val roomKts = "androidx.room:room-ktx:${Versions.room}"
-    const val roomRxJava = "androidx.room:room-rxjava2:${Versions.room}"
+    const val roomKtx = "androidx.room:room-ktx:${Versions.room}"
 
     //NetWork
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
@@ -229,8 +228,7 @@ object Libraries {
 
     fun DependencyHandler.addRoom() {
         implementation(room)
-        implementation(roomKts)
-        implementation(roomRxJava)
+        implementation(roomKtx)
         kapt(roomCompiler)
     }
 

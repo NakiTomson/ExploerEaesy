@@ -21,7 +21,6 @@ interface RoomModule {
         @JvmStatic
         fun provideDataBase(context: Context): ExploderEasyDataBase {
             return Room.databaseBuilder(context, ExploderEasyDataBase::class.java, "explodereas.db")
-                .addMigrations(MIGRATION_1_2)
                 .build()
         }
 

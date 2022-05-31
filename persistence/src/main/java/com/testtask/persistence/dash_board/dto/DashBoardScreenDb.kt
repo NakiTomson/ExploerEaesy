@@ -9,7 +9,7 @@ data class DashBoardScreenDb(
     @ColumnInfo(name = "id") val id: Int = 0,
     @ColumnInfo(name = "title") val title: String?,
     @ColumnInfo(name = "text") val text: String?,
-    @ColumnInfo(name = "media", index = true) val media: String?
+    @ColumnInfo(name = "media", index = false) val media: String?
 ) {
 
     companion object {

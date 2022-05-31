@@ -8,7 +8,7 @@ import com.testtask.persistence.dao.DashBoardDao
 import com.testtask.persistence.dash_board.dto.DashBoardScreenDb
 
 @Database(
-    version = 2,
+    version = 1,
     exportSchema = true,
     entities = [AnonymousUserDb::class, DashBoardScreenDb::class],
 //    autoMigrations = [

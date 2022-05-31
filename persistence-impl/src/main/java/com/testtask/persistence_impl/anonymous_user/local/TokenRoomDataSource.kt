@@ -9,19 +9,19 @@ class TokenRoomDataSource @Inject constructor(
     private val userDao: AnonymousUserDao,
 ) : TokenLocalDataSource {
 
-    override fun createUser(user: AnonymousUserDb) {
+    override suspend fun createUser(user: AnonymousUserDb) {
         return userDao.insert(user)
     }
 
-    override fun deleteUser(user: AnonymousUserDb) {
+    override suspend fun deleteUser(user: AnonymousUserDb) {
         return userDao.delete(user)
     }
 
-    override fun updateUser(user: AnonymousUserDb) {
+    override suspend fun updateUser(user: AnonymousUserDb) {
         return userDao.update(user)
     }
 
-    override fun getUser(): AnonymousUserDb? {
+    override suspend fun getUser(): AnonymousUserDb? {
         return userDao.getAll()?.firstOrNull()
     }
 }

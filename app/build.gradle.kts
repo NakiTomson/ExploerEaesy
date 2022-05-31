@@ -19,21 +19,24 @@ android {
         versionCode = AndroidSdk.verstionCode
         versionName = AndroidSdk.versionName
 
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments += mapOf(
-                    "room.schemaLocation" to "$projectDir/schemas",
-                    "room.incremental" to "true",
-                    "room.expandProjection" to "true"
-                )
+        kapt {
+            arguments {
+                arg("room.schemaLocation", "$projectDir/schemas".toString())
             }
         }
     }
 
+    sourceSets {
+        // Adds exported schema location as test app assets.
+        getByName("androidTest").assets.srcDir("$projectDir/schemas")
+    }
+
+
     applicationVariants.all {
         outputs.forEach { output ->
             if (output is com.android.build.gradle.internal.api.BaseVariantOutputImpl) {
-                output.outputFileName = "${applicationId}.${versionName}-(${versionCode})-${buildType.name}.${output.outputFile.extension}"
+                output.outputFileName =
+                    "${applicationId}.${versionName}-(${versionCode})-${buildType.name}.${output.outputFile.extension}"
             }
         }
     }

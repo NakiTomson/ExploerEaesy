@@ -10,15 +10,15 @@ class RoomDashBoardDataSource @Inject constructor(
     private val dashBoardDao: DashBoardDao,
 ) : DashBoardLocalDataSource {
 
-    override fun createDashBoard(screen: DashBoardScreenDb) {
+    override suspend fun createDashBoard(screen: DashBoardScreenDb) {
         dashBoardDao.insert(screen)
     }
 
-    override fun createDashBoard(screen: List<DashBoardScreenDb>) {
+    override suspend fun createDashBoard(screen: List<DashBoardScreenDb>) {
         dashBoardDao.saveAll(screen)
     }
 
-    override fun getDashBoards(): Resource<List<DashBoardScreenDb>> {
+    override suspend fun getDashBoards(): Resource<List<DashBoardScreenDb>> {
         val result = dashBoardDao.getAll() ?: listOf()
         val status = if (result.isNullOrEmpty()) Resource.Status.EMPTY else Resource.Status.COMPLETED
         return Resource(status, result)

@@ -7,15 +7,15 @@ import com.testtask.persistence.anonymous_user.dto.AnonymousUserDb
 interface AnonymousUserDao {
 
     @Query("SELECT * FROM anonymous_user")
-    fun getAll(): List<AnonymousUserDb>?
+    suspend fun getAll(): List<AnonymousUserDb>?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(anonymousUser: AnonymousUserDb)
+    suspend fun insert(anonymousUser: AnonymousUserDb)
 
     @Update
-    fun update(anonymousUser: AnonymousUserDb)
+    suspend fun update(anonymousUser: AnonymousUserDb)
 
     @Delete
-    fun delete(anonymousUser: AnonymousUserDb)
+    suspend fun delete(anonymousUser: AnonymousUserDb)
 
 }

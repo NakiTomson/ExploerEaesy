@@ -4,7 +4,7 @@ import com.testtask.Resource
 import com.testtask.persistence.dash_board.dto.DashBoardScreenDb
 
 interface DashBoardLocalDataSource {
-    fun createDashBoard(screen: DashBoardScreenDb)
-    fun createDashBoard(screen: List<DashBoardScreenDb>)
-    fun getDashBoards(): Resource<List<DashBoardScreenDb>>
+    suspend fun createDashBoard(screen: DashBoardScreenDb)
+    suspend fun createDashBoard(screen: List<DashBoardScreenDb>)
+    suspend fun getDashBoards(): Resource<List<DashBoardScreenDb>>
 }

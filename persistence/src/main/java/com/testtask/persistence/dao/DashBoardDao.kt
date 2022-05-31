@@ -10,13 +10,13 @@ import com.testtask.persistence.dash_board.dto.DashBoardScreenDb
 interface DashBoardDao {
 
     @Query("SELECT * FROM dash_board_screen")
-    fun getAll(): List<DashBoardScreenDb>?
+    suspend fun getAll(): List<DashBoardScreenDb>?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(anonymousUser: DashBoardScreenDb)
+    suspend fun insert(anonymousUser: DashBoardScreenDb)
 
-    @Insert
-    @JvmSuppressWildcards
-    fun saveAll(anonymousUser: List<DashBoardScreenDb>)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+//    @JvmSuppressWildcards
+    suspend fun saveAll(anonymousUser: List<DashBoardScreenDb>)
 
 }
